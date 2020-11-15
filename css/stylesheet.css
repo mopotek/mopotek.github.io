@@ -1,0 +1,131 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.material-icons { 
+	font-size: 48px; 
+}
+
+.jumbotron a img {
+	height:30px;
+}
+
+.skill {
+	height:90%;
+	width:90%; 
+	margin: 30px;
+	padding: 30px;
+	background-color: #e9ecef;
+}
+
+.carousel-border {
+	padding: 2px;
+	background-color: #e9ecef;
+}
+
+footer {
+	margin-top: 30px;
+}
+
+footer .row {
+	padding: 10px;
+}
+
+footer a {
+	color: black;
+}
+
+.social {
+	height:30px;	
+}
+
+.block {
+	margin-top:60px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+li {
+	margin-bottom:20px;
+}
+
+/* Portfolio CSS*/
+
+.portfolio-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  max-width: 530px;
+  margin: auto auto 1rem;
+}
+
+.portfolio-item .caption {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(33, 37, 41, 0.4);
+}
+
+.portfolio-item .caption .caption-content {
+  color: #fff;
+  margin: auto 2rem 2rem;
+}
+
+.portfolio-item .caption .caption-content h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.portfolio-item .caption .caption-content p {
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 992px) {
+  .portfolio-item {
+    max-width: none;
+    margin: 30px;
+  }
+  .portfolio-item .caption {
+    transition: background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+    transition: clip-path 0.25s ease-out, background-color 0.7s;
+    transition: clip-path 0.25s ease-out, background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+    -webkit-clip-path: inset(0px);
+    clip-path: inset(0px);
+  }
+  .portfolio-item .caption .caption-content {
+    transition: opacity 0.25s;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 5rem;
+  }
+  .portfolio-item img {
+    transition: -webkit-clip-path 0.25s ease-out;
+    transition: clip-path 0.25s ease-out;
+    transition: clip-path 0.25s ease-out, -webkit-clip-path 0.25s ease-out;
+    -webkit-clip-path: inset(-1px);
+    clip-path: inset(-1px);
+  }
+  .portfolio-item:hover img {
+    -webkit-clip-path: inset(2rem);
+    clip-path: inset(2rem);
+  }
+  .portfolio-item:hover .caption {
+    background-color: rgba(29, 128, 159, 0.9);
+    -webkit-clip-path: inset(2rem);
+    clip-path: inset(2rem);
+  }
+}
+
+.map iframe {
+  height: 100%;
+  width: 100%;
+  border: 0;
+}
