@@ -6,6 +6,10 @@ html {
 	font-size: 48px; 
 }
 
+.jumbotron .display-2 {
+	width:100%;
+}
+
 .jumbotron a img {
 	height:30px;
 }
