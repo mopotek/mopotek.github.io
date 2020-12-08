@@ -15,6 +15,9 @@
 		<title>Alexandra Pometko</title>
 	</head>
 	<body  data-spy="scroll" data-target=".navbar" data-offset="120">
+		<!--Scroll back to top button -->
+		<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="material-icons align-bottom">keyboard_arrow_up</i><br>Top</button> 
+		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="index.html">
 				<i class="material-icons align-middle" style="color: #ffaf3b">wb_sunny</i>
@@ -34,16 +37,17 @@
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<div class="row">
+					<h1 class="display-3">A pain-tracking companion that empowers its users</h1>
+				</div>
+				<div class="row">
 					<div class="col-12 col-md-6">
-					<h1 class="display-4">A pain-tracking companion that empowers its users</h1>
-						<p class="lead">2017</p>
-						<p>Product definition • UX Writing • UX design</p>
+					
+						<p><i>Product definition • UX Writing • UX design</i></p>
+						<p>2017</p>
 					</div>
 					<div class="col col-md-6">
-						<p class="lead">The problem</p>
 						<p>Millions of people suffer from physical pain that handicaps their personal and professional life, causing a great deal of <b>mental suffering</b> as well <b>dissociation</b> of the person from their body.</p>
 						<p>The companion was designed to allow individuals suffering from chronic pain to <b>track their pain’s evolution everyday</b> in a way that empowers them to become experts of their bodies and their pain.</p>
-						<p>This was a particularly relevant project because previous interviews with chronic pain afflicted people showed me that when one gained a sense of <b>ownership</b> over their pain, it made it way more tolerable mentally and gave the individual a stronger sense of <b>agency</b>.</p>
 					</div>
 				</div>
 			</div>
@@ -68,57 +72,67 @@
 				<h2 class="display-4">Which methods did I use?</h2>
 				<p>This project was under an NDA contract so I cannot disclose precise elements of the project.</p>
 			</div>
-			<div class="row text-center">
-				<div class="col-12 col-lg-6">
-					<div class="skill">
-						<h3>1. Product definition with card-sorting exercise and userflows</h3>
-						<p>The research team and the product owner gave me a list of functionalities and user stories that they deduced from interviews with people that have chronic pain.</p>
-						<p>From there, I created an app architecture that I deduced from card-sorting exercises I carried out with several users where each card was a functionality.</p>
+			<div class="row">
+				<div class="col-12 col-lg-6 skill">
+					<div class="back">
+						<h2>1. Product definition with card-sorting exercise and userflows</h2>
+						<p>From a list of functionalities and user stories gathered from user research, I created an app architecture that I deduced from card-sorting exercises I carried out with several users.</p>
 						<p>That way, the architecture that I defined was <b>consistent with the user's mental models</b>. I concretized this step with userflows that made this architecture easy to understand for all stakeholders of the project.</p>
 					</div>
 				</div>
-				<div class="col col-lg-6">
-					<div class="skill">
-						<h3>2. Gamification design</h3>
+				<div class="col-12 col-lg-6 skill">
+					<div class="back">
+						<h2>2. Gamification design</h2>
 						<p>The app was gamified in order to make it more pleasant and encourage the user to use it daily for more accurate tracking.</p>
 						<p>I created a multi-level gamification system that <b>rewarded the user for performing crucial actions</b> such as tracking their pain or filling out their medical profile for a more accurate analysis.</p>
 					</div>
 				</div>
 			</div>
-			<div class="row text-center">
-				<div class="col-6 offset-3">
-					<div class="skill">
-						<h3>3. Lo / hi-res prototyping and user testing</h3>
-						<p>First, I created <b>paper prototypes</b> that I tested with internal staff which revealed me some usability in the interface, and GDPR comprehension issues in the wording that led me to create an A and B versions of the consenting process. This process was paper prototyped and tested again, which saved a lot of resources that we would have used if we had realised these issues later.</p>
-						<p>I then created hi-fidelity <b>dynamic prototypes</b> with Axure (after one more round of testing and redesigning) that allowed to concretize the app definition to deliver to the stakeholders and developers.</p>
+			<div class="row">
+				<div class="col-6 offset-3 skill">
+					<div class="back">
+						<h2>3. Lo / hi-res prototyping and user testing</h2>
+						<p>I created <b>paper prototypes</b> which after testing revealed me some usability problems in the interface, and GDPR comprehension issues in the wording. This led me to create an A and B versions of the consenting process that I tested to choose the best one.</p>
 						<p>Particular attention was put on the user's <b>consent</b> by being transparent on which data we collected and why by using exact understandable wording.</p>
 					</div>
 				</div>
 			</div>
+		
 			<div class="row block text-center">
 				<div class="col">
-					<a type="button" class="btn btn-primary" href="index.html#portfolio">See more projects</a>
+					<a type="button" class="linkedin" href="index.html#portfolio">See more projects</a>
 				</div>
 			</div>
 		</div>
 		
-		<footer class="container block text-center">
-			<div class="row">
-				<div class="col">
-					<a target="_blank" href="https://www.linkedin.com/in/alexandra-pometko/"><img class="social" src="assets/linkedin-black.png" alt="LinkedIn logo"></img></a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<p>© 2020, Alexandra Pometko</p>
-				</div>
-			</div>
+		<footer class="container">
+			<p>© 2020, Alexandra Pometko</p>
 		</footer>
 		
-		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script>
+		//Get the button:
+			mybutton = document.getElementById("myBtn");
+
+			// When the user scrolls down 20px from the top of the document, show the button
+			window.onscroll = function() {scrollFunction()};
+
+			function scrollFunction() {
+			  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+			  } else {
+				mybutton.style.display = "none";
+			  }
+			}
+
+			// When the user clicks on the button, scroll to the top of the document
+			function topFunction() {
+			  document.body.scrollTop = 0; // For Safari
+			  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+			} 
+		</script>
 	</body>
 </html>

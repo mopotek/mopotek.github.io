@@ -2,24 +2,17 @@ html {
   scroll-behavior: smooth;
 }
 
-.material-icons { 
-	font-size: 48px; 
+p, li {
+font-size: 1.25rem;
+font-weight: 300;
 }
 
-.jumbotron .display-2 {
-	width:100%;
+.jumbotron img {
+	max-height:500px;
 }
 
-.jumbotron a img {
-	height:30px;
-}
-
-.skill {
-	height:90%;
-	width:90%; 
-	margin: 30px;
-	padding: 30px;
-	background-color: #e9ecef;
+#jumbo {
+  padding: 30px;
 }
 
 .carousel-border {
@@ -27,8 +20,19 @@ html {
 	background-color: #e9ecef;
 }
 
-footer {
-	margin-top: 30px;
+.linkedin {
+  background-color: #ffaf3b; 
+  border: none;
+  font-weight: bold;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.linkedin:hover {
+	color:white;
 }
 
 footer .row {
@@ -45,6 +49,11 @@ footer a {
 
 .block {
 	margin-top:60px;
+	margin-bottom:60px;
+}
+
+.display-3, .display-4 {
+	margin-bottom:15px;
 }
 
 .vertical-align {
@@ -56,13 +65,39 @@ li {
 	margin-bottom:20px;
 }
 
+
+.skill {
+	padding:10px;
+}
+
+.back {
+	height:100%;
+	padding: 40px;
+	background-color: #e9ecef;	
+}
+
+#myBtn {
+  display: none; 
+  position: fixed; 
+  bottom: 20px;
+  right: 20px;
+  z-index: 99; 
+  border: none; 
+  outline: none; 
+  background-color: #555; 
+  color: white;
+  padding: 10px; /* Some padding */
+}
+
+#myBtn:hover {
+  background-color: blue; /* Add a dark-grey background on hover */
+}
 /* Portfolio CSS*/
 
 .portfolio-item {
   display: block;
   position: relative;
   overflow: hidden;
-  max-width: 530px;
   margin: auto auto 1rem;
 }
 
@@ -72,14 +107,13 @@ li {
   width: 100%;
   position: absolute;
   top: 0;
-  bottom: 0;
   z-index: 1;
   background-color: rgba(33, 37, 41, 0.4);
 }
 
 .portfolio-item .caption .caption-content {
   color: #fff;
-  margin: auto 2rem 2rem;
+  margin: 2rem 2rem;
 }
 
 .portfolio-item .caption .caption-content h2 {
@@ -95,7 +129,7 @@ li {
 @media (min-width: 992px) {
   .portfolio-item {
     max-width: none;
-    margin: 30px;
+	margin:10px;
   }
   .portfolio-item .caption {
     transition: background-color 0.7s, -webkit-clip-path 0.25s ease-out;
@@ -106,9 +140,9 @@ li {
   }
   .portfolio-item .caption .caption-content {
     transition: opacity 0.25s;
-    margin-left: 5rem;
+    margin-left: 3rem;
     margin-right: 5rem;
-    margin-bottom: 5rem;
+    margin-top: 5rem;
   }
   .portfolio-item img {
     transition: -webkit-clip-path 0.25s ease-out;

@@ -15,7 +15,7 @@
 		
 		<!-- favicon-->
 		<link rel="icon" href="assets/favicon.ico">
-		<title>Alexandra Pometko</title>
+		<title>Alexandra Pometko</title>		
 	</head>
 		<body  data-spy="scroll" data-target=".navbar" data-offset="120">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,32 +29,45 @@
 			<div class="navbar-nav">
 			  <a class="nav-item nav-link" href="#portfolio">Portfolio</a>
 			  <a class="nav-item nav-link" href="#skills">Skills</a>
-			  <a class="nav-item nav-link" target="_blank" href="assets/CV.pdf">CV</a>
+			  <a type="button" class="nav-item nav-link" target="_blank" href="assets/CV.pdf">CV</a>
 			  <!-- <a class="nav-item nav-link" href="#">Publications (coming soon!)</a> -->
 			</div>
 		  </div>
 		</nav>
-		<div class="jumbotron jumbotron-fluid">
-			<div class="container vertical-align">
-				<div class="row">
-					<div class="col-12 col-sm-12 col-md-6 col-lg-4">
+		
+		<!--Scroll back to top button -->
+		<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="material-icons align-bottom">keyboard_arrow_up</i><br>Top</button> 
+		
+		<div class="jumbotron jumbotron-fluid" id="jumbo">
+			<div class="container ">
+				<div class="row align-items-center">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-6">
 						<img rel="image_src" src="assets/me.png" class="img-fluid" alt="picture of a woman smiling"></img>
 					</div>
 					<div class="col-sm col-md-6">
-						<h1 class="display-2">Hi there! I'm Alexandra.</h1>
-						<p class="lead">I create experiences with technology that have a positive impact on people and society. </p>
-						<p> User Researcher • UX Designer • Cognitive Engineer</p><br>
-						<a target="_blank" href="https://www.linkedin.com/in/alexandra-pometko/"><img class="social" src="assets/linkedin-black.png" alt="LinkedIn logo"></img></a>
+						<h1 class="display-3">Hi there! I'm Alexandra.</h1>
+						<p><i>User Researcher • UX Designer • Cognitive Engineer</i></p>
+						<p>I create experiences with technology that have a positive impact on people and society. </p>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<!-- I believe-->
-		<div class="container text-center intro" id="alexandra">
-			<p class="lead">I am a strong believer that design is great and durable when it fulfils a person's functional, emotional, and self-realization needs.</p>
-			<p class="lead"><b>User-centered design</b> is a philosophy that I embraced during my time at the <a target="_blank" href="https://www.bordeaux-inp.fr/sites/default/files/upload/BordeauxINP/Anglais/Ecoles/ficheecole-ensc-2019.pdf">Graduate School of Cognitive Engineering</a> in Bordeaux, and at UC Santa Cruz in California. It is a practice that uses an array of <b>scientific</b> and <b>creative</b> methods to understand those needs and find the best way to answer them by always involving users in the design process.</p>
-			<p class="lead">After several professional experiences at Lucine, the Social and Emotional Technology Lab, or my own entrepreneurship project Arisan, I am looking for new opportunities globally.</p>
+		<div class="container intro" id="alexandra">
+			<div class="row block">
+				<div class="col-md-6">
+					<p>There is something so exciting about design that fulfils a person's functional, emotional, and self-realization needs.</p>
+					<p>I embraced the <b>user-centered design</b> philosophy at the <i><a target="_blank" href="https://www.bordeaux-inp.fr/sites/default/files/upload/BordeauxINP/Anglais/Ecoles/ficheecole-ensc-2019.pdf">Graduate School of Cognitive Engineering</a></i> in Bordeaux, and at <i><a target="_blank" href="https://www.soe.ucsc.edu/departments/computational-media">UC Santa Cruz</a></i> in California.</p>
+				</div>
+				<div class="col-md-6">
+					<p>At <i><a target="_blank" href="https://lucine.fr/">Lucine</a></i>, the <i><a target="_blank" href="https://setlab.soe.ucsc.edu/projects.php">Social and Emotional Technology Lab</a></i>, or my own entrepreneurship project <i><a target="_blank" href="https://actu.fr/lifestyle/gps-drawing-artisan-lappli-vous-aide-creer-dessins-courant_22500920.html">Arisan</a></i>, I took on fascinating challenges in the field of social drones, digital therapeutics, alternative realities...</p>
+					<p>Everyday, I continue my <b>exploration</b> of various design spaces at work and in my side projects.</p>
+				</div>
+			</div>
+			<div class="text-center block">
+				<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/alexandra-pometko/"><img class="social" src="assets/linkedin-black.png" alt="LinkedIn logo"></img> Let's chat on LinkedIn!</a>
+			</div>
 		</div>
 		
 		<!-- Portfolio -->
@@ -102,7 +115,7 @@
 					<div class="caption">
 					  <div class="caption-content">
 						<div class="h2">Social drones</div>
-						<p class="mb-0">Literature and market review • User research • Speculative design</p>
+						<p class="lead mb-0">Literature and market review • User research • Speculative design</p>
 					  </div>
 					</div>
 					<img class="img-fluid" src="assets/drone-spotlight.png" alt="photograph of people dancing on a beach with an illustrated drone projecting visuals around them">
@@ -113,77 +126,90 @@
 		</section>
 		
 		<!-- What I do-->
-		<div class="container text-center block" id="skills">
-			<h1 class="display-4">Here is what I love doing!</h1>
+		<div class="container block" id="skills">
+			<h1 class="display-4 text-center">Here is what I love doing!</h1>
 			<div class="row">
-				<div class="col-12 col-lg-6">
-					<div class="skill">
-						<i class="material-icons">person_search</i>
-						<h2>User and market research</h2>
+				<div class="col-12 col-lg-6 skill">
+					<div class="back">
+						<h2><i class="material-icons">person_search</i> User and market research</h2>
 						<p>Before starting to design, I must <b>dig deep</b> to understand what the user's problem really is and where it stems from. 
 						To do so, I will carry out interviews, questionnaires, focus groups, social media explorations, or build my <b>empathy</b> and understanding of the user's 
 						environment through cultural probes.</p><p>All steps will be documented with <b>deliverables</b> such as thematic analyses reports, 
 						personae, or customer journey maps. </p>
 					</div>
 				</div>
-				<div class="col col-lg-6">
-					<div class="skill">
-						<i class="material-icons">format_shapes</i>
-						<h2>Prototyping and design</h2>
+				<div class="col col-lg-6 skill">
+					<div class="back">
+						<h2><i class="material-icons">format_shapes</i> Prototyping and design</h2>
 						<p>Once I understood the user's needs and desires, I can move on to the prototyping phase where I will <b>iteratively</b> create 
-						wireframes, dynamic prototypes and drafts of the final product.</p><p>Since the beggining, I will practice <b>participatory design</b> by 
-						involving users with card-sorting 				exercises to determine a system architecture that follows their mental model or 
-						co-design sessions so the product really makes sense to them. 
+						wireframes and dynamic prototypes of the final product.</p><p>Since the beggining, I will practice <b>participatory design</b> to 
+						involve users.
 						For each drafted version, small-scale or big-scale <b>user tests</b> will take place, depending on the projects budget, 
 						to make sure the final product is pleasant, usable, and relevant.</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 col-lg-6">
-					<div class="skill">
-						<i class="material-icons">phonelink_setup</i>
-						<h2>Usability evaluations</h2>
-						<p>I will evaluate how easy (or hard) it is to use the product by carrying out user tests followed by AttrackDiff or SUS questionnaires, 
-						cognitive walkthroughs, audits and other various experiments.</p><p>	
+				<div class="col-12 col-lg-6 skill">
+					<div class="back">
+						<h2><i class="material-icons">phonelink_setup</i> Usability evaluations</h2>
+						<p>I will evaluate how easy (or hard) it is to use the product by carrying out <b>user tests</b> followed by interviews and usability questionnaires.</p><p>	
 						Bastien and Scapin's or Norman and Nielsen's <b>usability heuristics</b> will be amongst my main evaluation criteriums. </p><p>
-						Also expect me to take ergonomy and <b>accessibility</b> for people with diffent kinds of physical, visual, hearing, or cognitive disabilities into account!</p>
+						Also expect me to take ergonomy and <b>accessibility</b> for people with diffent kinds of disabilities into account!</p>
 					</div>
 				</div>
-				<div class="col col-lg-6">
-					<div class="skill">
-						<i class="material-icons">engineering</i>
-						<h2>Project management</h2>
+				<div class="col col-lg-6 skill">
+					<div class="back">
+						<h2><i class="material-icons">engineering</i> Project management</h2>
 						<p>After understanding the needs of the client and the user, I create technical and functional <b>specifications</b> and users stories of what needs to be implemented. 
 						This allows me to create a <b>planning</b>, evaluate <b>risks</b>, and <b>delegate</b> tasks to all members of the team. </p>
-						<p>On a day to day basis, using the <b>SCRUM Agile</b> methodology, I will follow the advancement of the project and the sprint, 
-						communicate internally and externally, as well as facilitate any workshops or thinking sessions.</p>
+						<p>On a day to day basis, I will follow the advancement of the project and the sprint, 
+						communicate internally and externally, and facilitate workshops.</p>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<div class="container text-center">
-			<p class="lead">The rest of the time, you will find me surfing, practicing one of my 5 languages (¡Actualmente estoy aprendiendo español!), visiting immersive art exhibits, or doing any kind of outdoor physical activity with friends 😊</p>
+		<div class="container block">
+			<div class="row align-items-center">
+				<div class="col col-lg-6">
+					<p>The rest of the time, you will find me surfing, practicing one of my 5 languages (¡Actualmente estoy aprendiendo español!), visiting immersive art exhibits, or doing any kind of outdoor physical activity with friends 😊</p>
+				</div>
+				<div class="col col-lg-6">
+					<img rel="image_src" src="assets/surf.jpg" class="img-fluid" alt="picture of a woman surfing"></img>
+				</div>
+			</div>
 		</div>
 		
-		<footer class="container block text-center">
-			<div class="row">
-				<div class="col">
-					<a target="_blank" href="https://www.linkedin.com/in/alexandra-pometko/"><img class="social" src="assets/linkedin-black.png" alt="LinkedIn logo"></img></a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<p>© 2020, Alexandra Pometko</p>
-				</div>
-			</div>
+		<footer class="container block">
+			<p>© 2020, Alexandra Pometko</p>
 		</footer>
 		
-		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+			<!-- Back to top JS-->
+		<script>
+		//Get the button:
+			mybutton = document.getElementById("myBtn");
+
+			// When the user scrolls down 20px from the top of the document, show the button
+			window.onscroll = function() {scrollFunction()};
+
+			function scrollFunction() {
+			  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+			  } else {
+				mybutton.style.display = "none";
+			  }
+			}
+
+			// When the user clicks on the button, scroll to the top of the document
+			function topFunction() {
+			  document.body.scrollTop = 0; // For Safari
+			  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+			} 
+		</script>
 	</body>
 </html>
