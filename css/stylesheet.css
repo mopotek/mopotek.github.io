@@ -92,6 +92,10 @@ li {
 #myBtn:hover {
   background-color: blue; /* Add a dark-grey background on hover */
 }
+
+.carousel-caption {
+	background-color: rgba(0, 0, 0,0.5);
+}
 /* Portfolio CSS*/
 
 .portfolio-item {
