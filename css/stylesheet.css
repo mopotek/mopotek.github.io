@@ -2,17 +2,26 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+	color: #000814;
+}
+
 p, li {
 font-size: 1.25rem;
 font-weight: 300;
+}
+
+p i a {
+	color: #27A599;
 }
 
 .jumbotron img {
 	max-height:500px;
 }
 
-#jumbo {
+.jumbotron {
   padding: 30px;
+  background-color: #e9ecef;
 }
 
 .carousel-border {
@@ -21,10 +30,9 @@ font-weight: 300;
 }
 
 .linkedin {
-  background-color: #ffaf3b; 
+  background-color: #f5cc00; 
   border: none;
-  font-weight: bold;
-  color: white;
+  color: #000814;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -32,7 +40,7 @@ font-weight: 300;
 }
 
 .linkedin:hover {
-	color:white;
+	color:#000814;
 }
 
 footer .row {
@@ -67,12 +75,12 @@ li {
 
 
 .skill {
-	padding:10px;
+	padding:15px;
 }
 
 .back {
 	height:100%;
-	padding: 40px;
+	padding: 30px;
 	background-color: #e9ecef;	
 }
 
@@ -84,13 +92,13 @@ li {
   z-index: 99; 
   border: none; 
   outline: none; 
-  background-color: #555; 
-  color: white;
+  background-color: #e9ecef; 
+  color: #000814;
   padding: 10px; /* Some padding */
 }
 
 #myBtn:hover {
-  background-color: blue; /* Add a dark-grey background on hover */
+  border: dashed 1px #000814 /* Add a dark-grey background on hover */
 }
 
 .carousel-caption {
@@ -133,7 +141,7 @@ li {
 @media (min-width: 992px) {
   .portfolio-item {
     max-width: none;
-	margin:10px;
+	margin:15px;
   }
   .portfolio-item .caption {
     transition: background-color 0.7s, -webkit-clip-path 0.25s ease-out;
@@ -166,8 +174,4 @@ li {
   }
 }
 
-.map iframe {
-  height: 100%;
-  width: 100%;
-  border: 0;
-}
+
