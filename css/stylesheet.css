@@ -170,4 +170,21 @@ li {
   }
 }
 
+blockquote {
+	position: relative;
+	margin: 40px 0;
+	padding: 1.6em 2.4em .7em calc(1.4em + var(--quote-image-width));
+	font: italic 1rem;
+	background: var(--quote-bg) no-repeat left / var(--quote-image-width);
+	border-radius: var(--border-rad);
+	border: 2px solid white;
+	box-shadow: 2px 2px 4px hsl(0 0% 0% / 20%);
+	text-indent: 1.6em;
+}
 
+blockquote p {
+  
+    font-size: 1rem;
+    font-weight: 100;
+    
+}
