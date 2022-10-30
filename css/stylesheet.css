@@ -188,3 +188,9 @@ blockquote p {
     font-weight: 100;
     
 }
+
+
+
+.carousel-fade .carousel-item, .carousel-item img  {
+  max-height: 90vh;
+}
