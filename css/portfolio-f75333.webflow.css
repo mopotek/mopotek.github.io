@@ -104,6 +104,7 @@ a {
 img {
   max-width: 100%;
   display: inline-block;
+  border-radius: 8px;
 }
 
 .header {
@@ -133,6 +134,20 @@ img {
   margin-right: auto;
   padding-left: 32px;
   padding-right: 32px;
+}
+
+.container-centered {
+  z-index: 1;
+  width: 100%;
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .text-caps {
@@ -1070,6 +1085,7 @@ img {
   .section {
     padding-top: 64px;
     padding-bottom: 20px;
+    
   }
 
   .section.pb-0 {
