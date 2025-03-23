@@ -101,6 +101,12 @@ a {
   transition: opacity .2s;
 }
 
+.highlight {
+  background-color: rgba(255, 254, 243, 1) !important;
+  padding: 4px;
+}
+
+
 img {
   max-width: 100%;
   display: inline-block;
