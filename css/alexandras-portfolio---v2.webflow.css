@@ -2483,6 +2483,16 @@ strong {
     align-items: flex-start;
     padding: 24px 32px;
   }
+
+  .grid {
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2 {
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 767px) {
