@@ -2060,7 +2060,7 @@ strong {
 }
 
 ._404-text {
-  font-size: 200px;
+  font-size: 10rem;
   line-height: 1em;
 }
 
@@ -2211,6 +2211,10 @@ strong {
 
 .paragraph, .rich-text-block-3 {
   font-style: normal;
+}
+
+.grid-2 {
+  grid-template-rows: auto;
 }
 
 @media screen and (max-width: 991px) {
