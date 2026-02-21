@@ -782,7 +782,7 @@ strong {
 .blog-details-wrapper {
   grid-row-gap: 40px;
   flex-flow: column;
-  max-width: 900px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
