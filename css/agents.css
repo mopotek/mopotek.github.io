@@ -1,0 +1,315 @@
+/* ============================================================
+   AI Agents Section — agents.css
+   Step 1: Scaffold styles (visible borders, layout structure)
+   ============================================================ */
+
+/* Two-column layout container */
+.agents-two-col {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 2rem;
+  min-height: 420px;
+}
+
+.agents-carousel-area {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.agents-description-panel {
+  min-height: 420px;
+  padding: 0 0 0 1.25rem;
+}
+
+/* Scaffold: list of agent placeholder items */
+.agents-placeholder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.agent-placeholder-item {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.agent-placeholder-item.is-active {
+  border-color: #333;
+  color: #111;
+  font-weight: 500;
+  background: #f5f5f5;
+}
+
+/* Arrow navigation buttons */
+.agents-arrow-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 40px;
+}
+
+.agent-arrow-btn {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #333;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  transition:
+    background 150ms ease-out,
+    color 150ms ease-out,
+    border-color 150ms ease-out,
+    transform 100ms ease-out;
+}
+
+.agent-arrow-btn:hover {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+.agent-arrow-btn:active {
+  transform: scale(0.92);
+  background: #111;
+  border-color: #111;
+}
+
+.agent-arrow-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Description panel: animated content wrapper */
+@keyframes agentDescFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.agents-desc-content {
+  animation: agentDescFadeIn 250ms ease-out both;
+}
+
+/* Description panel scaffold content */
+.agents-desc-placeholder-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.75rem;
+}
+
+.agents-desc-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.agents-desc-chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 1px 8px;
+  border: 1px solid #ddd;
+  border-radius: 100px;
+  color: #666;
+  margin-right: 4px;
+  margin-bottom: 1rem;
+}
+
+.agents-desc-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* Mobile: stack columns */
+@media (max-width: 768px) {
+  .agents-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .agents-carousel-area,
+  .agents-description-panel {
+    min-height: 240px;
+  }
+}
+
+
+/* ============================================================
+   Layout A: Playing cards — Step 2
+   ============================================================ */
+
+/* Container for the circular card arrangement.
+   Cards are absolutely centered inside; overflow:visible lets them
+   extend slightly outside without clipping. */
+.card-fan-container {
+  position: relative;
+  height: 420px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* The card itself — all cards sit at the same center point.
+   Slot transforms move them to their positions in the circle. */
+.playing-card {
+  position: absolute;
+  left: calc(50% - 104px);
+  top: calc(50% - 145px);
+  width: 208px;
+  height: 291px;
+  background: #fff;
+  border: 1.5px solid #d8d8d8;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.10),
+    0 1px 4px rgba(0, 0, 0, 0.06);
+  transform-origin: center center;
+  overflow: hidden;
+  filter: grayscale(1);
+  opacity: 0.6;
+  cursor: pointer;
+  transition:
+    transform 350ms ease-out,
+    filter 350ms ease-out,
+    opacity 350ms ease-out;
+}
+
+/* ---- Circular slot positions ----
+   Slot 0 = front/active  Slot 1 = left  Slot 2 = top-behind  Slot 3 = right
+   When the active card changes, each card's data-slot updates and CSS
+   animates it to the new position — creating a rotating deck feel. */
+
+.playing-card[data-slot="0"] {
+  transform: translate(0, 40px) scale(1.08);
+  filter: none;
+  opacity: 1;
+  z-index: 10;
+}
+
+.playing-card[data-slot="1"] {
+  transform: translate(-105px, 20px) scale(0.80) rotate(-7deg);
+  z-index: 3;
+}
+
+.playing-card[data-slot="2"] {
+  transform: translate(0, -75px) scale(0.76) rotate(2deg);
+  z-index: 2;
+}
+
+.playing-card[data-slot="3"] {
+  transform: translate(105px, 20px) scale(0.80) rotate(7deg);
+  z-index: 3;
+}
+
+/* Hover nudge: signals interactivity without activating the card.
+   Each slot floats ~12px toward the viewer + slight scale bump.
+   Slot 0 (active) is intentionally excluded. */
+.playing-card[data-slot="1"].is-hovered {
+  transform: translate(-105px, 8px) scale(0.83) rotate(-7deg);
+}
+
+.playing-card[data-slot="2"].is-hovered {
+  transform: translate(0, -87px) scale(0.79) rotate(2deg);
+}
+
+.playing-card[data-slot="3"].is-hovered {
+  transform: translate(105px, 8px) scale(0.83) rotate(7deg);
+}
+
+/* Red suits (♥ ♦) — color both corners */
+.playing-card[data-suit="♥"] .card-corner,
+.playing-card[data-suit="♦"] .card-corner {
+  color: #b91c1c;
+}
+
+/* Corner base styles */
+.card-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  color: #111;
+}
+
+/* Top-left */
+.card-corner-tl {
+  top: 10px;
+  left: 12px;
+}
+
+/* Bottom-right — rotated 180deg to mirror top-left */
+.card-corner-br {
+  bottom: 10px;
+  right: 12px;
+  transform: rotate(180deg);
+  transform-origin: center center;
+}
+
+.card-rank {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-suit-sym {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Colored placeholder in the card center */
+.card-image-area {
+  position: absolute;
+  top: 52px;
+  left: 16px;
+  right: 16px;
+  bottom: 52px;
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--card-accent, #ddd);
+  opacity: 0.75;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Keyboard focus ring — box-shadow instead of outline so it isn't clipped */
+.playing-card:focus-visible {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.10),
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    0 0 0 3px #fff,
+    0 0 0 5px #333;
+}
