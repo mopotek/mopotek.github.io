@@ -97,11 +97,11 @@
       '</div>';
 
     document.getElementById('agentPrev').addEventListener('click', function () {
-      setActiveCard((activeIndex - 1 + agentsData.length) % agentsData.length);
+      setActiveCard((activeIndex + 1) % agentsData.length);
     });
 
     document.getElementById('agentNext').addEventListener('click', function () {
-      setActiveCard((activeIndex + 1) % agentsData.length);
+      setActiveCard((activeIndex - 1 + agentsData.length) % agentsData.length);
     });
 
     // Hover: nudge non-active cards to signal they're clickable.
@@ -139,9 +139,9 @@
       var delta = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(delta) > 50) {
         if (delta < 0) {
-          setActiveCard((activeIndex + 1) % agentsData.length);
-        } else {
           setActiveCard((activeIndex - 1 + agentsData.length) % agentsData.length);
+        } else {
+          setActiveCard((activeIndex + 1) % agentsData.length);
         }
       }
     }, { passive: true });
