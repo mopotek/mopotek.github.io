@@ -1552,6 +1552,10 @@ strong {
   display: flex;
 }
 
+.hero-cta-block {
+  margin-top: 16px;
+}
+
 .hero-social-link {
   border: 1px solid var(--light-black);
   background-color: var(--white);
