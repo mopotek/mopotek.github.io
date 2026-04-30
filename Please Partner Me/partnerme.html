@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Please Partner Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   DESIGN SYSTEM TOKENS
+   ============================================ */
+:root {
+  /* Colours */
+  --color-bg-deep: #090e1a;
+  --color-bg-mid: #0d1f1a;
+  --color-surface: #111827;
+  --color-text-primary: #f0f4f8;
+  --color-text-secondary: #c9d4e0;
+  --color-text-dim: #8a9bb0;
+  --color-accent-gold: #f5c842;
+  --color-accent-cyan: #00e8c8;
+  --color-accent-coral: #ff6b6b;
+  --color-glow-gold: rgba(245,200,66,0.18);
+  --color-glow-cyan: rgba(0,232,200,0.15);
+  --color-bloom: rgba(245,200,66,0.12);
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-handwritten: 'Caveat', cursive;
+
+  --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 2vw, 1rem);
+  --text-base: clamp(1rem, 2.5vw, 1.125rem);
+  --text-md: clamp(1.125rem, 3vw, 1.375rem);
+  --text-lg: clamp(1.375rem, 4vw, 1.75rem);
+  --text-xl: clamp(1.75rem, 5vw, 2.25rem);
+  --text-2xl: clamp(2.25rem, 6vw, 3rem);
+  --text-3xl: clamp(3rem, 8vw, 4.5rem);
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.6;
+  --leading-loose: 1.8;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.06em;
+  --tracking-widest: 0.12em;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+  --space-2xl: 8rem;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent-cyan);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND
+   ============================================ */
+#bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse 120% 80% at 30% 40%, var(--color-bg-mid) 0%, var(--color-bg-deep) 60%);
+  background-size: 300% 300%;
+  animation: bgDrift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes bgDrift {
+  0%   { background-position: 0% 0%; }
+  33%  { background-position: 100% 20%; }
+  66%  { background-position: 50% 100%; }
+  100% { background-position: 20% 60%; }
+}
+
+/* ============================================
+   PARTICLE CANVAS
+   ============================================ */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================
+   BLOOM TRANSITION
+   ============================================ */
+#bloom {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, var(--color-bloom), transparent 70%);
+  opacity: 0;
+  transform: scale(0.3);
+  transition: none;
+}
+
+/* ============================================
+   SLIDE SYSTEM
+   ============================================ */
+#slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+  transition: none;
+  padding: var(--space-md);
+  overflow: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.slide.exiting {
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 600ms ease-in-out, transform 600ms ease-in-out;
+}
+
+.slide.entering {
+  animation: slideEnter 600ms ease-in-out forwards;
+}
+
+@keyframes slideEnter {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================
+   PARALLAX LAYERS
+   ============================================ */
+.parallax-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.layer-text {
+  position: relative;
+  z-index: 3;
+}
+
+/* ============================================
+   TEXT ENTRANCE ANIMATIONS
+   ============================================ */
+.line {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
+
+.line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+.t-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-accent-gold);
+}
+
+.t-title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-accent-gold);
+}
+
+.t-handwritten {
+  font-family: var(--font-handwritten);
+  font-size: var(--text-xl);
+  line-height: var(--leading-loose);
+  color: var(--color-accent-gold);
+}
+
+.t-handwritten-cyan {
+  font-family: var(--font-handwritten);
+  font-size: var(--text-xl);
+  line-height: var(--leading-loose);
+  color: var(--color-accent-cyan);
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+}
+
+.t-body-md {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+}
+
+.t-support {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+.t-coral {
+  font-family: var(--font-handwritten);
+  font-size: var(--text-xl);
+  line-height: var(--leading-loose);
+  color: var(--color-accent-coral);
+}
+
+.glow-gold {
+  color: var(--color-accent-gold);
+  text-shadow: 0 0 20px var(--color-glow-gold), 0 0 40px var(--color-glow-gold);
+}
+
+.glow-cyan {
+  color: var(--color-accent-cyan);
+  text-shadow: 0 0 20px var(--color-glow-cyan), 0 0 40px var(--color-glow-cyan);
+}
+
+/* ============================================
+   IMAGE PLACEHOLDERS
+   ============================================ */
+.img-placeholder {
+  border: 2px dashed var(--color-accent-cyan);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-sm);
+  min-height: 200px;
+  box-shadow: 0 0 20px var(--color-glow-cyan);
+  font-family: var(--font-handwritten);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+/* ============================================
+   SLIDE LAYOUTS
+   ============================================ */
+.layout-center {
+  flex-direction: column;
+  text-align: center;
+  gap: var(--space-md);
+  max-width: 700px;
+  margin: auto;
+}
+
+.layout-image-left,
+.layout-image-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.layout-image-right .col-image { order: 2; }
+.layout-image-right .col-text  { order: 1; }
+
+.col-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.col-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 680px) {
+  .layout-image-left,
+  .layout-image-right {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  /* reset column ordering on mobile */
+  .layout-image-right .col-image,
+  .layout-image-right .col-text { order: unset; }
+  /* show image above text, just smaller */
+  .col-image {
+    display: flex;
+    justify-content: center;
+  }
+  .col-image .img-placeholder {
+    width: 180px !important;
+    height: 150px !important;
+    min-height: unset;
+  }
+  .col-image img {
+    max-width: 60vw;
+    height: auto;
+  }
+}
+
+/* ============================================
+   NAVIGATION DOTS
+   ============================================ */
+#nav-dots {
+  position: fixed;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-dim);
+  cursor: pointer;
+  transition: background 300ms, box-shadow 300ms;
+  border: none;
+  padding: 0;
+}
+
+.dot.active {
+  background: var(--color-accent-gold);
+  box-shadow: 0 0 10px var(--color-accent-gold);
+}
+
+/* ============================================
+   ARROW PROMPT
+   ============================================ */
+#arrow-prompt {
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  z-index: 60;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  animation: pulseOpacity 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseOpacity {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+#arrow-prompt.hidden { display: none; }
+
+/* ============================================
+   SLIDE 1 SPECIFIC
+   ============================================ */
+#slide-1 .press-hint {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  animation: pulseOpacity 2.5s ease-in-out infinite;
+  margin-top: var(--space-sm);
+}
+
+/* ============================================
+   SLIDE 6 BULLETS
+   ============================================ */
+.bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: var(--space-sm) 0;
+}
+
+.bullet-list li {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+/* ============================================
+   SLIDE 7 — SCROLL INSIDE SLIDE
+   ============================================ */
+#slide-7 {
+  overflow-y: auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: block;
+}
+
+#slide-7 .scroll-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+#slide-7 .sticky-image {
+  position: sticky;
+  top: var(--space-md);
+  z-index: 2;
+  margin-bottom: var(--space-lg);
+}
+
+/* ============================================
+   SLIDE 8 — FULL SCROLL SECTION
+   ============================================ */
+#slide-8 {
+  overflow-y: auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: block;
+}
+
+#slide-8 .section-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: linear-gradient(to bottom, var(--color-bg-deep) 70%, transparent);
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+  text-align: center;
+}
+
+#slide-8 .scroll-items {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 var(--space-md) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+#slide-8 .scroll-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+#slide-8 .scroll-item .img-placeholder {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  min-height: unset;
+}
+
+.subheader-label {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-wide);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.subheader-label.cyan { color: var(--color-accent-cyan); }
+.subheader-label.gold { color: var(--color-accent-gold); }
+
+/* ============================================
+   SLIDE 9 DIVIDER
+   ============================================ */
+.divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent-gold), transparent);
+  margin: var(--space-md) auto;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+/* Dot touch targets: invisible pseudo-element extends hit area to 44x44px */
+.dot {
+  position: relative;
+}
+.dot::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
+}
+
+/* iOS smooth momentum scrolling on scroll slides */
+#slide-7,
+#slide-8 {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Sticky with webkit prefix for older iOS */
+#slide-7 .sticky-image,
+#slide-8 .section-header {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+/* Slide 1 image: fluid on small screens */
+#slide-1 img {
+  width: clamp(200px, 60vw, 300px);
+}
+
+@media (max-width: 480px) {
+  /* Tighten spacing on very small phones */
+  .layout-center {
+    gap: var(--space-sm);
+  }
+  #slide-7 .scroll-content,
+  #slide-8 .scroll-items {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+  #slide-8 .section-header {
+    padding: var(--space-sm) var(--space-sm) var(--space-md);
+  }
+  /* Shrink image placeholders in scroll items on tiny screens */
+  #slide-8 .scroll-item .img-placeholder {
+    height: 200px;
+  }
+  /* Reduce slide padding */
+  .slide {
+    padding: var(--space-sm);
+  }
+  /* Reduce nav dot gap so 11 dots fit */
+  #nav-dots {
+    gap: 2px;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Scale down title on very narrow screens */
+  .t-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+  .t-heading {
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+  }
+}
+
+/* ============================================
+   CLOSING GLOW TEXT
+   ============================================ */
+.closing-gold {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  color: var(--color-accent-gold);
+  text-shadow: 0 0 30px var(--color-glow-gold), 0 0 60px var(--color-glow-gold);
+}
+
+/* ============================================
+   PASSWORD GATE
+   ============================================ */
+#pw-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: var(--color-bg-deep);
+  /* same drifting gradient as the page bg */
+  background-image: radial-gradient(ellipse 120% 80% at 30% 40%, var(--color-bg-mid) 0%, var(--color-bg-deep) 60%);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#pw-gate.pw-gate--unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pw-gate__card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border: 1px solid rgba(245, 200, 66, 0.12);
+  border-radius: 20px;
+  padding: clamp(2rem, 6vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow:
+    0 0 60px rgba(245, 200, 66, 0.06),
+    0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.pw-gate__lock {
+  width: 48px;
+  height: 48px;
+  color: var(--color-accent-gold);
+  filter: drop-shadow(0 0 12px rgba(245, 200, 66, 0.4));
+}
+
+.pw-gate__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-accent-gold);
+  text-shadow: 0 0 20px var(--color-glow-gold);
+  text-align: center;
+}
+
+.pw-gate__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+  text-align: center;
+  line-height: var(--leading-normal);
+}
+
+.pw-gate__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.pw-gate__field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pw-gate__input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(245, 200, 66, 0.2);
+  border-radius: 12px;
+  height: 52px;
+  padding: 0 52px 0 16px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  -webkit-appearance: none;
+}
+
+.pw-gate__input::placeholder {
+  color: var(--color-text-dim);
+}
+
+.pw-gate__input:focus {
+  border-color: rgba(245, 200, 66, 0.55);
+  box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.1);
+}
+
+.pw-gate__input.pw-gate__input--error {
+  border-color: var(--color-accent-coral);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
+  animation: pwShake 0.4s ease;
+}
+
+.pw-gate__submit {
+  position: absolute;
+  right: 6px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-gold);
+  border: none;
+  border-radius: 8px;
+  color: var(--color-bg-deep);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.pw-gate__submit:hover { opacity: 0.85; transform: scale(1.05); }
+.pw-gate__submit:active { transform: scale(0.96); }
+
+.pw-gate__error {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-accent-coral);
+  text-align: center;
+  min-height: 1.4em;
+}
+
+@keyframes pwShake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-7px); }
+  40%       { transform: translateX(7px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== PASSWORD GATE ===================== -->
+<div id="pw-gate" role="dialog" aria-modal="true" aria-label="Password protected content">
+  <div class="pw-gate__card">
+    <svg class="pw-gate__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+    <h1 class="pw-gate__title">Private Preview</h1>
+    <p class="pw-gate__subtitle">This page is password protected.<br>Enter the password to continue.</p>
+    <form id="pw-form" class="pw-gate__form" autocomplete="off" novalidate>
+      <div class="pw-gate__field-wrap">
+        <input
+          type="password"
+          id="pw-input"
+          class="pw-gate__input"
+          placeholder="Enter password"
+          autocomplete="current-password"
+          autofocus
+          spellcheck="false"
+          aria-label="Password"
+        >
+        <button type="submit" class="pw-gate__submit" aria-label="Unlock">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </div>
+      <p id="pw-error" class="pw-gate__error" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+<!-- ========================================================= -->
+
+<!-- Animated background -->
+<div id="bg-gradient" aria-hidden="true"></div>
+
+<!-- Particle canvas -->
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<!-- Bloom transition overlay -->
+<div id="bloom" aria-hidden="true"></div>
+
+<!-- ============================================
+     SLIDES
+     ============================================ -->
+<div id="slideshow" role="main">
+
+  <!-- SLIDE 1: Title -->
+  <section class="slide active" id="slide-1" data-slide="0" aria-label="Title slide">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-center">
+          <img src="Images/1.png" alt="Two glowing mango characters side by side, looking at each other, soft bioluminescent glow around them" style="width:300px;height:auto;margin:0 auto;display:block;border-radius:1rem;">
+          <h1 class="t-title glow-gold line">Please Partner Me</h1>
+          <p class="t-handwritten-cyan line">a completely unbiased proposal 🥭</p>
+          <p class="press-hint line">press any key or tap to begin</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: The Story Begins -->
+  <section class="slide" id="slide-2" data-slide="1" aria-label="The Story Begins">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-image-left">
+          <div class="col-image" data-depth-x="-20" data-depth-y="-20">
+            <img src="Images/2.png" alt="Mango character in Spain, slumped on a chair, bored, grey vibes, tiny flamenco hat" style="width:350px;height:auto;border-radius:1rem;display:block;">
+          </div>
+          <div class="col-text">
+            <p class="t-handwritten line">Let me tell you a story.</p>
+            <p class="t-body line">I was living in Spain, bored with the lack of energy, craving in-person work, dreaming about the next big step for my career.</p>
+            <p class="t-body line">I made the bold move to come to Australia, keeping my old job so there would be no career discontinuity.</p>
+            <p class="t-body line">Got hella lucky finding a role at Atlassian.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: Then I Found You -->
+  <section class="slide" id="slide-3" data-slide="2" aria-label="Then I Found You">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-image-right">
+          <div class="col-text">
+            <p class="t-handwritten line">Then I found you.</p>
+            <p class="t-body-md line">The highlight of my stay so far.</p>
+            <p class="t-body line">So many fun moments. Friends. Hobbies. A life I actually love.</p>
+            <p class="t-body line">And even though my job is a bit stressful, it is pushing me to be more resilient and more brave.</p>
+            <p class="t-body line">I get to be paid for doing the things I love.</p>
+          </div>
+          <div class="col-image">
+            <img src="Images/3.png" alt="Two mango characters surfing together on the same wave, huge grins, glowing trail behind them" style="width:350px;height:auto;border-radius:1rem;display:block;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: The Confusion -->
+  <section class="slide" id="slide-4" data-slide="3" aria-label="The Confusion">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-center" style="max-width:600px;">
+          <div class="col-image" style="margin:0 auto;">
+            <img src="Images/4.png" alt="Mango character tangled in bureaucratic papers and question marks, looking dizzy" style="width:300px;height:auto;border-radius:1rem;display:block;margin:0 auto;">
+          </div>
+          <p class="t-coral line">And then... the visa situation.</p>
+          <p class="t-body line">Made me spiral.</p>
+          <p class="t-body line">And somewhere in the noise, I forgot what I came here for.</p>
+          <p class="t-support line">It was never about staying in Australia no matter what.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: The Reframe -->
+  <section class="slide" id="slide-5" data-slide="4" aria-label="The Reframe">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-image-left">
+          <div class="col-image">
+                              <img src="Images/5.png" alt="" style="width:300px;height:auto;border-radius:1rem;display:block;margin:0 auto;">
+
+          </div>
+          <div class="col-text">
+            <p class="t-handwritten line">Let us reframe.</p>
+            <p class="t-body line">My goal was always to take the next meaningful step in my career.</p>
+            <p class="t-body line">This contract at Atlassian, a big tech company, is exactly that.</p>
+            <p class="t-body line">Regional work was never really the answer. Finishing this contract is.</p>
+            <p class="t-body line">And if I need to go back to Europe after, honestly? That is okay.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: The Options -->
+  <section class="slide" id="slide-6" data-slide="5" aria-label="The Options">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-center" style="max-width:680px;">
+          <h2 class="t-heading line">My options as a backup to the partner visa</h2>
+          <ul class="bullet-list">
+            <li class="line">🥭 <span>Leave Australia at the end of my contract. Totally valid.</span></li>
+            <li class="line">🌊 <span>Apply for a skilled visa. Still on the table.</span></li>
+            <li class="line">🪵 <span>Student visa: learn carpentry or finance or something, buy time.</span></li>
+            <li class="line">✨ <span>Keep applying for jobs from inside Atlassian, where I am most hireable.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: Lawful Sasha (scroll inside) -->
+  <section class="slide" id="slide-7" data-slide="6" aria-label="Lawful Sasha">
+    <div class="scroll-content">
+      <p class="t-handwritten line">Now. About the pressure.</p>
+      <p class="t-body line">You should feel none of it. My staying in Australia does not depend on you.</p>
+      <p class="t-body line">If we break up, that would be super sad. I do not think it will happen. But if it did, I would be fine.</p>
+      <p class="t-body line">You would have absolutely no remorse about declaring it. We would not lie.</p>
+      <p class="t-heading glow-gold line" style="margin-top:var(--space-md);">We will be lawful.</p>
+      <p class="t-handwritten-cyan line">Because I am Lawful Sasha. 🥭⚖️</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: What's In It For You (full scroll) -->
+  <section class="slide" id="slide-8" data-slide="7" aria-label="What is in it for you">
+    <div class="section-header">
+      <h2 class="t-heading line">What is in it for you?</h2>
+      <p class="t-handwritten-cyan line">if I am not picking strawberries in Darwin, and instead have life stability</p>
+    </div>
+    <div class="scroll-items">
+
+      <p class="subheader-label cyan line">Short term</p>
+
+      <div class="scroll-item">
+        <p class="t-body line">More camping trips</p>
+        <img src="Images/6.png" class="scroll-item-img" alt="">
+
+      </div>
+
+      <div class="scroll-item">
+        <p class="t-body line">Sri Lanka surf trip</p>
+        <img src="Images/7.jpg" class="scroll-item-img" alt="">
+
+      </div>
+
+      <div class="scroll-item">
+        <p class="t-body line">French Polynesia trip</p>
+        <img src="Images/8.jpg" class="scroll-item-img" alt="">
+
+      </div>
+
+      <div class="scroll-item">
+        <p class="t-body line">Potent armpit sniffs</p>
+        <img src="Images/9.gif" class="scroll-item-img" alt="">
+
+      </div>
+
+      <p class="subheader-label gold line" style="margin-top:var(--space-md);">Long term</p>
+
+      <div class="scroll-item">
+        <p class="t-body line">Daily mango feeding</p>
+        <img src="Images/10.jpg" class="scroll-item-img" alt="">
+
+      </div>
+
+
+      <div class="scroll-item">
+        <p class="t-body line">Getting barreled before 30</p>
+        <img src="Images/11.jpg" class="scroll-item-img" alt="">
+      </div>
+
+      <div class="scroll-item">
+        <p class="t-body line">AI whispering projects and experimenting toward our dream life</p>
+        <img src="Images/12.webp" class="scroll-item-img" alt="">
+
+      </div>
+
+      <div class="scroll-item">
+        <p class="t-body line">Travel while working remotely: Indonesia, anywhere</p>
+        <img src="Images/13.png" class="scroll-item-img" alt="">
+
+      </div>
+
+      <div style="height:var(--space-xl);"></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9: So What Do You Say -->
+  <section class="slide" id="slide-9" data-slide="8" aria-label="So what do you say">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-center" style="max-width:580px;">
+          <p class="t-handwritten line" style="font-size:var(--text-2xl);">So... what do you say?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: What Would Be The Next Steps -->
+  <section class="slide" id="slide-10" data-slide="9" aria-label="What would be the next steps">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-center" style="max-width:580px;">
+            <h2 class="t-heading line">What would be the next steps?</h2>
+            <p class="t-body line">Have an honest conversation about what feels right to each of us.</p>
+            <p class="t-body line">Move in together, try it out.</p>
+            <p class="t-body line">Start sharing some finances</p>
+            <p class="t-body line">Register the relationship</p>
+            <p class="t-body line">A few months in, if we are both still keen, we apply.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: Not Sitting Still -->
+  <section class="slide" id="slide-11" data-slide="10" aria-label="I will not be sitting still">
+    <div class="parallax-root">
+      <div class="layer layer-text" data-depth-x="6" data-depth-y="6">
+        <div class="layout-center" style="max-width:600px;">
+          <p class="t-handwritten-cyan line">While we wait, I will not be sitting still.</p>
+          <p class="t-support line">I will prepare everything I need for my backup plans:</p>
+          <p class="t-body line">Submit my expression of interest for the skilled visa.</p>
+          <p class="t-body line">Research student visa options: curriculums, application dates</p>
+          <p class="t-body line">Keep applying for jobs and building relationships toward employer sponsorship.</p>
+          <div class="divider line"></div>
+          <p class="closing-gold glow-gold line">No pressure.</p>
+          <p class="t-handwritten-cyan line">Just mangoes 🥭</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- #slideshow -->
+
+<!-- Navigation dots -->
+<nav id="nav-dots" aria-label="Slide navigation">
+  <button class="dot active" aria-label="Slide 1" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 2" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 3" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 4" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 5" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 6" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 7" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 8" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 9" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 10" tabindex="0"></button>
+  <button class="dot" aria-label="Slide 11" tabindex="0"></button>
+</nav>
+
+<!-- Arrow prompt -->
+<div id="arrow-prompt" aria-hidden="true">tap or press → to begin ›</div>
+
+<!-- Background music -->
+<audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+
+<script>
+/* ============================================
+   PARTICLES
+   ============================================ */
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const COUNT = 100;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function createParticle() {
+    const isCyan = Math.random() > 0.5;
+    return {
+      x: randomBetween(0, canvas.width),
+      y: randomBetween(canvas.height * 0.2, canvas.height),
+      r: randomBetween(1, 3),
+      speed: randomBetween(0.15, 0.5),
+      alpha: randomBetween(0.1, 0.7),
+      alphaDir: Math.random() > 0.5 ? 1 : -1,
+      alphaSpeed: randomBetween(0.003, 0.009),
+      color: isCyan ? '0,232,200' : '245,200,66',
+    };
+  }
+
+  for (let i = 0; i < COUNT; i++) {
+    const p = createParticle();
+    p.y = randomBetween(0, canvas.height);
+    particles.push(p);
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      p.y -= p.speed;
+      p.alpha += p.alphaDir * p.alphaSpeed;
+      if (p.alpha >= 0.8 || p.alpha <= 0.05) p.alphaDir *= -1;
+      if (p.y < -4) {
+        Object.assign(p, createParticle());
+        p.y = canvas.height + 4;
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.alpha.toFixed(3)})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ============================================
+   SLIDESHOW CONTROLLER
+   ============================================ */
+(function() {
+  const slides      = Array.from(document.querySelectorAll('.slide'));
+  const dots        = Array.from(document.querySelectorAll('.dot'));
+  const bloom       = document.getElementById('bloom');
+  const arrowPrompt = document.getElementById('arrow-prompt');
+  let current       = 0;
+  let animating     = false;
+  let interacted    = false;
+
+  // Scroll slides (indices 6=Lawful Sasha, 7=What's In It For You)
+  const SCROLL_SLIDES = new Set([6, 7]);
+  const scrollState   = { 6: false, 7: false }; // atBottom flags
+
+  /* ----------- staggered line entrance (fixed slides) ----------- */
+  function animateLines(slide) {
+    const lines = slide.querySelectorAll('.line');
+    lines.forEach((el, i) => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 200 + i * 300);
+    });
+  }
+
+  /* ----------- IntersectionObserver entrance (scroll slides) ----------- */
+  function setupScrollObserver(slide) {
+    const lines = slide.querySelectorAll('.line');
+    lines.forEach(el => el.classList.remove('visible'));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { root: slide, threshold: 0.25 });
+    lines.forEach(el => obs.observe(el));
+  }
+
+  /* ----------- activate a slide ----------- */
+  function activateSlide(idx) {
+    const slide = slides[idx];
+    slide.classList.add('active');
+    dots[idx].classList.add('active');
+    // reset scroll position
+    slide.scrollTop = 0;
+    scrollState[idx] = false;
+    if (SCROLL_SLIDES.has(idx)) {
+      setupScrollObserver(slide);
+    } else {
+      animateLines(slide);
+    }
+  }
+
+  /* ----------- initial state ----------- */
+  activateSlide(0);
+
+  /* ----------- bloom pulse ----------- */
+  function triggerBloom() {
+    bloom.style.transition = 'none';
+    bloom.style.opacity    = '0';
+    bloom.style.transform  = 'scale(0.3)';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bloom.style.transition = 'opacity 1.2s ease-out, transform 1.2s ease-out';
+        bloom.style.opacity    = '1';
+        bloom.style.transform  = 'scale(2.5)';
+        setTimeout(() => {
+          bloom.style.opacity   = '0';
+          bloom.style.transform = 'scale(3)';
+        }, 400);
+      });
+    });
+  }
+
+  /* ----------- slide transition ----------- */
+  function goTo(next) {
+    if (animating || next === current) return;
+    if (next < 0 || next >= slides.length) return;
+    // block forward nav on scroll slides until at bottom
+    if (next > current && SCROLL_SLIDES.has(current) && !scrollState[current]) return;
+
+    animating = true;
+    if (!interacted) {
+      interacted = true;
+      arrowPrompt.classList.add('hidden');
+    }
+
+    const outgoing = slides[current];
+    const incoming = slides[next];
+
+    outgoing.classList.add('exiting');
+    outgoing.classList.remove('active');
+    dots[current].classList.remove('active');
+
+    triggerBloom();
+
+    setTimeout(() => {
+      outgoing.classList.remove('exiting');
+      outgoing.querySelectorAll('.line').forEach(el => el.classList.remove('visible'));
+
+      incoming.classList.add('entering');
+      activateSlide(next);
+      current = next;
+
+      setTimeout(() => {
+        incoming.classList.remove('entering');
+        animating = false;
+      }, 650);
+    }, 620);
+  }
+
+  /* ----------- scroll-to-bottom tracking for scroll slides ----------- */
+  slides.forEach((slide, idx) => {
+    if (!SCROLL_SLIDES.has(idx)) return;
+    slide.addEventListener('scroll', () => {
+      if (current !== idx) return;
+      const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 60;
+      if (atBottom && !scrollState[idx]) {
+        scrollState[idx] = true;
+        // briefly flash the nav dot to hint that forward nav is now unlocked
+        dots[idx].style.boxShadow = `0 0 18px var(--color-accent-cyan)`;
+        setTimeout(() => { dots[idx].style.boxShadow = ''; }, 800);
+      }
+    }, { passive: true });
+  });
+
+  /* ----------- keyboard navigation ----------- */
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== ' ') return;
+    e.preventDefault();
+    if (animating) return;
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    else goTo(current + 1);
+  });
+
+  /* ----------- click/tap navigation ----------- */
+  // Track touch movement to avoid firing navigation on scroll-drag taps
+  let touchStartX = 0, touchStartY = 0, touchMoved = false;
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchMoved  = false;
+  }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    const dx = Math.abs(e.touches[0].clientX - touchStartX);
+    const dy = Math.abs(e.touches[0].clientY - touchStartY);
+    if (dx > 8 || dy > 8) touchMoved = true;
+  }, { passive: true });
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('#nav-dots')) return;
+    if (animating || touchMoved) return;
+    const half = window.innerWidth / 2;
+    if (e.clientX >= half) goTo(current + 1);
+    else goTo(current - 1);
+  });
+
+  /* ----------- dot navigation ----------- */
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', e => {
+      e.stopPropagation();
+      // allow dot navigation bypassing scroll gate
+      const savedState = scrollState[current];
+      scrollState[current] = true;
+      goTo(i);
+      if (i !== current) scrollState[current] = savedState;
+    });
+  });
+
+  /* ============================================
+     PARALLAX
+     ============================================ */
+  const parallaxLayers = [];
+
+  slides.forEach(slide => {
+    slide.querySelectorAll('[data-depth-x]').forEach(el => {
+      parallaxLayers.push({
+        el,
+        targetX: 0, targetY: 0,
+        currentX: 0, currentY: 0,
+        dx: parseFloat(el.dataset.depthX || 0),
+        dy: parseFloat(el.dataset.depthY || 0),
+        slideIdx: parseInt(slide.dataset.slide),
+      });
+    });
+  });
+
+  let mouseX = 0, mouseY = 0;
+  const LERP = 0.08;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  window.addEventListener('deviceorientation', e => {
+    if (e.beta == null) return;
+    mouseX = Math.max(-1, Math.min(1, (e.gamma || 0) / 20));
+    mouseY = Math.max(-1, Math.min(1, (e.beta  || 0) / 30));
+  });
+
+  function parallaxTick() {
+    for (const p of parallaxLayers) {
+      if (p.slideIdx !== current) continue;
+      p.targetX = mouseX * p.dx;
+      p.targetY = mouseY * p.dy;
+      p.currentX += (p.targetX - p.currentX) * LERP;
+      p.currentY += (p.targetY - p.currentY) * LERP;
+      p.el.style.transform = `translate(${p.currentX.toFixed(2)}px, ${p.currentY.toFixed(2)}px)`;
+    }
+    requestAnimationFrame(parallaxTick);
+  }
+  parallaxTick();
+
+})();
+</script>
+
+<!-- ===================== PASSWORD GATE LOGIC ===================== -->
+<script>
+(function () {
+  /* ── Change this to your desired password ── */
+  const SITE_PASSWORD = 'mangojoust';
+  /* ──────────────────────────────────────────── */
+
+  const SESSION_KEY = 'pm_unlocked';
+  const gate   = document.getElementById('pw-gate');
+  const form   = document.getElementById('pw-form');
+  const input  = document.getElementById('pw-input');
+  const error  = document.getElementById('pw-error');
+  const music  = document.getElementById('bg-music');
+
+  function tryPlayMusic() {
+    if (music && music.paused) music.play().catch(() => {});
+  }
+
+  function unlock() {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    gate.classList.add('pw-gate--unlocked');
+    gate.addEventListener('transitionend', () => gate.remove(), { once: true });
+    tryPlayMusic();
+  }
+
+  /* Already unlocked this session — skip gate instantly */
+  if (sessionStorage.getItem(SESSION_KEY)) {
+    gate.remove();
+    tryPlayMusic();
+    return;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (input.value === SITE_PASSWORD) {
+      error.textContent = '';
+      unlock();
+    } else {
+      input.classList.remove('pw-gate__input--error');
+      /* force reflow so the shake animation replays */
+      void input.offsetWidth;
+      input.classList.add('pw-gate__input--error');
+      error.textContent = 'Incorrect password — try again.';
+      input.value = '';
+      input.focus();
+      input.addEventListener('input', () => {
+        input.classList.remove('pw-gate__input--error');
+        error.textContent = '';
+      }, { once: true });
+    }
+  });
+})();
+</script>
+<!-- ============================================================== -->
+</body>
+</html>
