@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI & The Future of Work - Winoa HR Summit 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* === DESIGN TOKENS (adapted from CommBank design system) === */
+    :root {
+      --c-primary: #FFCC00;
+      --c-primary-strong: #E6B800;
+      --c-secondary: #1E3A5F;
+      --c-neutral: #1E1E1E;
+      --c-surface: #FFFFFF;
+      --c-surface-muted: #F4F4F4;
+      --c-border: #E5E7EB;
+      --c-on-surface: #1E1E1E;
+      --c-on-primary: #231F20;
+
+      --s-xs: 8px; --s-sm: 16px; --s-md: 20px;
+      --s-lg: 28px; --s-xl: 40px; --s-gutter: 64px;
+
+      --r-sm: 4px; --r-md: 8px; --r-lg: 16px;
+      --r-xl: 24px; --r-full: 9999px;
+
+      --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --t-display: 40px; --t-headline-lg: 32px; --t-headline-md: 27px;
+      --t-headline-sm: 23px; --t-title-md: 19px; --t-body-lg: 18px;
+      --t-body-md: 16px; --t-body-sm: 14px; --t-label-sm: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: var(--font); font-size: var(--t-body-md); line-height: 1.5; color: var(--c-on-surface); background: var(--c-surface); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { margin: 0 0 var(--s-sm); line-height: 1.2; font-weight: 700; }
+    p { margin: 0 0 var(--s-sm); }
+    ul { margin: 0 0 var(--s-sm); padding-left: 1.25em; }
+    li { margin-bottom: var(--s-xs); }
+    strong { font-weight: 700; }
+    img { max-width: 100%; display: block; }
+    a { color: var(--c-secondary); text-decoration: none; }
+    button { font-family: var(--font); cursor: pointer; }
+
+    /* === HEADER === */
+    .site-header { position: sticky; top: 0; background: var(--c-surface); border-bottom: 1px solid var(--c-border); z-index: 20; padding: var(--s-sm) var(--s-xl); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-lg); justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: var(--s-sm); }
+    .brand-mark { width: 36px; height: 36px; background: var(--c-primary); border-radius: var(--r-sm); flex-shrink: 0; }
+    .brand-title { font-weight: 700; font-size: var(--t-body-lg); line-height: 1.2; }
+    .brand-subtitle { font-size: var(--t-body-sm); color: #555; margin-top: 2px; }
+    .tabs { display: flex; gap: var(--s-xs); flex-wrap: wrap; }
+    .tab-link { padding: 10px var(--s-sm); border-radius: var(--r-full); font-size: var(--t-body-sm); font-weight: 700; color: var(--c-on-surface); border: 1px solid transparent; transition: background 120ms ease; cursor: pointer; }
+    .tab-link:hover { background: var(--c-surface-muted); text-decoration: none; }
+    .tab-link.active { background: var(--c-primary); color: var(--c-on-primary); }
+
+    /* === SECTIONS === */
+    .tab-section { display: none; padding: var(--s-gutter) var(--s-xl); min-height: 60vh; animation: fadeIn 220ms ease; }
+    .tab-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* === TYPOGRAPHY === */
+    .eyebrow { text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--t-label-sm); font-weight: 700; color: var(--c-secondary); margin-bottom: var(--s-sm); }
+    .hero-statement { font-size: var(--t-display); line-height: 1.15; font-weight: 800; margin-bottom: var(--s-xl); max-width: 900px; }
+    .hero-statement.smaller { font-size: var(--t-headline-md); line-height: 1.25; }
+    .section-h { font-size: var(--t-headline-sm); margin-top: var(--s-xl); margin-bottom: var(--s-md); }
+
+    /* === CALLOUT === */
+    .callout { background: #FFF8DB; border-left: 4px solid var(--c-primary); padding: var(--s-md); border-radius: var(--r-md); margin-top: var(--s-md); }
+    .callout.muted { background: var(--c-surface-muted); border-left-color: var(--c-secondary); }
+    .callout.info { background: #EFF6FF; border-left-color: var(--c-secondary); }
+    .callout-label { font-size: var(--t-label-sm); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: #555; margin-bottom: 6px; }
+    .callout p { margin: 0; }
+
+    /* === IMAGE PLACEHOLDER === */
+    .img-placeholder { background: var(--c-surface-muted); border: 2px dashed var(--c-border); border-radius: var(--r-md); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--s-xl); text-align: center; color: #888; gap: var(--s-xs); }
+    .img-placeholder .ph-icon { font-size: 32px; }
+    .img-placeholder .ph-label { font-size: var(--t-body-sm); font-weight: 700; color: #555; }
+    .img-placeholder .ph-desc { font-size: var(--t-label-sm); color: #888; max-width: 340px; line-height: 1.5; }
+
+    /* === STATS BAR === */
+    .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--s-md); margin: var(--s-xl) 0; }
+    .stat { background: var(--c-surface-muted); border-radius: var(--r-md); padding: var(--s-md); text-align: center; }
+    .stat-num { font-size: var(--t-headline-lg); font-weight: 800; color: var(--c-secondary); line-height: 1; }
+    .stat-label { font-size: var(--t-body-sm); color: #555; margin-top: 4px; }
+
+    /* === CAREER CARDS === */
+    .career-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-md); margin-bottom: var(--s-xl); }
+    .career-card { background: var(--c-surface-muted); border-radius: var(--r-md); padding: var(--s-md); border-top: 3px solid var(--c-primary); cursor: pointer; transition: box-shadow 140ms ease, transform 140ms ease; user-select: none; }
+    .career-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .career-card.active { background: #FFF8DB; border-top-color: var(--c-secondary); }
+    .career-card-role { font-weight: 700; font-size: var(--t-body-md); }
+    .career-card-co { font-size: var(--t-body-sm); color: #555; margin: 2px 0 6px; }
+    .career-card-hint { font-size: var(--t-label-sm); color: #888; margin-top: var(--s-xs); }
+    .career-card-outcome { font-size: var(--t-body-sm); color: #333; overflow: hidden; max-height: 0; transition: max-height 320ms ease, opacity 320ms ease, margin-top 200ms; opacity: 0; }
+    .career-card.active .career-card-outcome { max-height: 200px; opacity: 1; margin-top: var(--s-sm); }
+
+    /* === STEP FLOW === */
+    .step-flow { display: flex; overflow-x: auto; padding: var(--s-md) 0 var(--s-lg); align-items: flex-start; }
+    .step-item { flex: 0 0 160px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; padding: var(--s-md) var(--s-sm); border-radius: var(--r-md); transition: background 140ms; }
+    .step-item:hover { background: var(--c-surface-muted); }
+    .step-item.active { background: #FFF8DB; }
+    .step-num { width: 36px; height: 36px; background: var(--c-border); border-radius: var(--r-full); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: var(--t-body-sm); color: #555; flex-shrink: 0; transition: background 200ms, color 200ms; }
+    .step-item.active .step-num { background: var(--c-secondary); color: white; }
+    .step-connector { flex: 0 0 28px; display: flex; align-items: center; justify-content: center; color: #CCC; font-size: 20px; padding-top: 18px; }
+    .step-label { font-size: var(--t-body-sm); font-weight: 700; margin-top: var(--s-xs); }
+    .step-detail { font-size: var(--t-label-sm); color: #555; margin-top: 4px; line-height: 1.5; overflow: hidden; max-height: 0; transition: max-height 300ms ease, opacity 300ms; opacity: 0; }
+    .step-item.active .step-detail { max-height: 120px; opacity: 1; }
+
+    /* === AGENT CARDS === */
+    .agent-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md); margin: var(--s-lg) 0; }
+    .agent-card { background: var(--c-surface-muted); border-radius: var(--r-md); padding: var(--s-md); border-left: 4px solid var(--c-secondary); }
+    .agent-emoji { font-size: 28px; margin-bottom: var(--s-xs); }
+    .agent-name { font-weight: 700; font-size: var(--t-body-md); margin-bottom: 4px; }
+    .agent-desc { font-size: var(--t-body-sm); color: #333; margin: 0; }
+
+    /* === SKILL CARDS === */
+    .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s-md); margin-bottom: var(--s-xl); }
+    .skill-card { background: var(--c-surface-muted); border-radius: var(--r-md); padding: var(--s-md); border-top: 3px solid var(--c-primary); cursor: pointer; transition: box-shadow 140ms; }
+    .skill-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .skill-card.active { background: #FFF8DB; border-top-color: var(--c-secondary); }
+    .skill-card-header { display: flex; align-items: center; gap: var(--s-sm); justify-content: space-between; }
+    .skill-icon { font-size: 22px; flex-shrink: 0; }
+    .skill-title { font-weight: 700; font-size: var(--t-body-md); flex: 1; }
+    .skill-toggle { font-size: 16px; color: #888; transition: transform 200ms; flex-shrink: 0; }
+    .skill-card.active .skill-toggle { transform: rotate(180deg); }
+    .skill-summary { font-size: var(--t-body-sm); color: #555; margin-top: var(--s-xs); }
+    .skill-detail { overflow: hidden; max-height: 0; transition: max-height 380ms ease, opacity 380ms; opacity: 0; }
+    .skill-card.active .skill-detail { max-height: 400px; opacity: 1; }
+    .skill-detail p { margin-top: var(--s-sm); font-size: var(--t-body-sm); color: #333; margin-bottom: 0; }
+
+    /* === BEFORE/AFTER === */
+    .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md); margin: var(--s-lg) 0; }
+    .panel { padding: var(--s-md); border-radius: var(--r-md); }
+    .before { background: #FEF2F2; border-top: 3px solid #EF4444; }
+    .after { background: #F0FDF4; border-top: 3px solid #22C55E; }
+    .panel-label { font-size: var(--t-label-sm); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: var(--s-xs); }
+    .before .panel-label { color: #EF4444; }
+    .after .panel-label { color: #22C55E; }
+    .panel p { font-size: var(--t-body-sm); color: #333; margin: 0; }
+
+    /* === WORKFLOW STEPPER === */
+    .workflow-stepper { background: var(--c-surface-muted); border-radius: var(--r-lg); padding: var(--s-xl); margin: var(--s-lg) 0; }
+    .workflow-progress { display: flex; gap: 4px; margin-bottom: var(--s-lg); }
+    .progress-dot { flex: 1; height: 4px; background: var(--c-border); border-radius: 2px; transition: background 200ms; }
+    .progress-dot.done { background: var(--c-secondary); }
+    .progress-dot.active { background: var(--c-primary); }
+    .workflow-step-content { min-height: 120px; }
+    .workflow-actor { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: var(--r-full); font-size: var(--t-label-sm); font-weight: 700; margin-bottom: var(--s-sm); }
+    .actor-copilot { background: #EDE9FF; color: #5B21B6; }
+    .actor-chatgpt { background: #DCFCE7; color: #166534; }
+    .actor-human { background: #FEF9C3; color: #92400E; }
+    .workflow-step-title { font-size: var(--t-title-md); font-weight: 700; margin-bottom: var(--s-xs); }
+    .workflow-step-desc { font-size: var(--t-body-sm); color: #333; }
+    .workflow-nav { display: flex; justify-content: space-between; align-items: center; margin-top: var(--s-lg); }
+    .workflow-nav-btn { padding: 10px 20px; border-radius: var(--r-full); border: 1px solid var(--c-border); background: var(--c-surface); font-weight: 700; font-size: var(--t-body-sm); transition: background 120ms, border-color 120ms; }
+    .workflow-nav-btn:hover:not(:disabled) { background: var(--c-primary); border-color: var(--c-primary); }
+    .workflow-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .workflow-counter { font-size: var(--t-body-sm); color: #555; font-weight: 700; }
+
+    /* === ARCHITECTURE DIAGRAM === */
+    .arch-diagram { margin: var(--s-xl) 0; display: flex; flex-direction: column; gap: var(--s-sm); }
+    .arch-layer { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); padding: var(--s-md); }
+    .arch-layer-label { font-size: var(--t-label-sm); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: var(--s-sm); }
+    .arch-layer.layer-copilot { border-top: 3px solid #7B61FF; }
+    .arch-layer.layer-copilot .arch-layer-label { color: #5B21B6; }
+    .arch-layer.layer-chatgpt { border-top: 3px solid #10A37F; }
+    .arch-layer.layer-chatgpt .arch-layer-label { color: #065F46; }
+    .arch-tools { display: flex; flex-wrap: wrap; gap: var(--s-sm); }
+    .arch-tool { background: var(--c-surface-muted); border-radius: var(--r-sm); padding: 8px 12px; font-size: var(--t-body-sm); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .arch-arrow { display: flex; justify-content: center; align-items: center; color: #AAA; font-size: 22px; line-height: 1; }
+    .arch-hr { display: flex; justify-content: center; }
+    .arch-hr-box { background: #FFF8DB; border: 2px solid var(--c-primary); border-radius: var(--r-md); padding: var(--s-sm) var(--s-lg); font-weight: 700; font-size: var(--t-body-md); display: flex; align-items: center; gap: var(--s-xs); }
+
+    /* === MORNING BRIEFING === */
+    .briefing-card { background: var(--c-neutral); color: white; border-radius: var(--r-lg); padding: var(--s-xl); }
+    .briefing-time { font-size: var(--t-label-sm); color: #AAA; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: var(--s-sm); }
+    .briefing-title { font-size: var(--t-headline-sm); font-weight: 800; margin-bottom: var(--s-lg); color: white; }
+    .briefing-item { display: flex; gap: var(--s-sm); align-items: flex-start; padding: var(--s-sm) 0; border-bottom: 1px solid #333; }
+    .briefing-item:last-of-type { border-bottom: none; }
+    .briefing-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .briefing-item-label { font-size: var(--t-label-sm); color: #AAA; }
+    .briefing-item-val { font-size: var(--t-body-sm); font-weight: 600; color: white; }
+    .briefing-priority { margin-top: var(--s-lg); background: rgba(255,204,0,0.12); border-radius: var(--r-sm); padding: var(--s-sm); }
+    .briefing-priority-label { font-size: var(--t-label-sm); color: var(--c-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .briefing-priority-item { font-size: var(--t-body-sm); color: #DDD; padding: 3px 0; }
+
+    /* === BUILDER WEEK DAY TABS === */
+    .day-tabs { display: flex; gap: var(--s-xs); margin-bottom: var(--s-lg); flex-wrap: wrap; }
+    .day-tab { padding: 8px var(--s-md); border-radius: var(--r-full); font-size: var(--t-body-sm); font-weight: 700; border: 1px solid var(--c-border); background: var(--c-surface); transition: background 120ms, border-color 120ms; }
+    .day-tab:hover { background: var(--c-surface-muted); }
+    .day-tab.active { background: var(--c-primary); border-color: var(--c-primary); color: var(--c-on-primary); }
+    .day-content { display: none; }
+    .day-content.active { display: block; animation: fadeIn 200ms ease; }
+    .day-heading { font-size: var(--t-headline-sm); font-weight: 800; margin-bottom: var(--s-sm); }
+    .day-tag { display: inline-block; padding: 4px 12px; border-radius: var(--r-full); font-size: var(--t-label-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--s-sm); }
+    .tag-inspire { background: #FEF9C3; color: #92400E; }
+    .tag-learn { background: #EDE9FF; color: #5B21B6; }
+    .tag-build { background: #DCFCE7; color: #166534; }
+    .tag-showcase { background: #FEE2E2; color: #991B1B; }
+
+    /* === TRAINING PRINCIPLES === */
+    .principle-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md); margin-bottom: var(--s-xl); }
+    .principle-card { background: var(--c-surface-muted); border-radius: var(--r-md); padding: var(--s-md); }
+    .principle-num { font-size: var(--t-headline-lg); font-weight: 800; color: var(--c-primary); line-height: 1; -webkit-text-stroke: 1px var(--c-primary-strong); }
+    .principle-title { font-weight: 700; margin: 4px 0 var(--s-xs); }
+    .principle-desc { font-size: var(--t-body-sm); color: #333; margin: 0; }
+
+    /* === BOTTLENECK VISUAL === */
+    .bottleneck-visual { display: flex; align-items: center; gap: var(--s-sm); padding: var(--s-xl) 0; overflow-x: auto; }
+    .pipeline-box { flex: 0 0 160px; background: var(--c-surface-muted); border-radius: var(--r-md); padding: var(--s-md); text-align: center; border: 2px solid transparent; }
+    .pipeline-box.boosted { background: #F0FDF4; border-color: #22C55E; }
+    .pipeline-box.bottleneck { background: #FEF2F2; border-color: #EF4444; }
+    .pipeline-box-label { font-size: var(--t-body-sm); font-weight: 700; }
+    .pipeline-box-stat { font-size: var(--t-label-sm); color: #555; margin-top: 6px; line-height: 1.5; }
+    .pipeline-arrow { font-size: 24px; color: #CCC; flex-shrink: 0; }
+
+    /* === TWO COL === */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl); margin-bottom: var(--s-xl); }
+
+    /* === FOOTER === */
+    .site-footer { padding: var(--s-md) var(--s-xl); border-top: 1px solid var(--c-border); font-size: var(--t-body-sm); color: #777; text-align: center; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 800px) {
+      .site-header { padding: var(--s-sm); flex-direction: column; align-items: flex-start; }
+      .tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: var(--s-xs); }
+      .tab-link { flex-shrink: 0; }
+      .tab-section { padding: var(--s-xl) var(--s-sm); }
+      .hero-statement { font-size: var(--t-headline-md); }
+      .two-col, .agent-cards, .principle-cards, .before-after { grid-template-columns: 1fr; }
+      .career-grid, .skill-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <div class="brand-text">
+      <div class="brand-title">AI & The Future of Work</div>
+      <div class="brand-subtitle">Winoa Global HR Summit · June 2026 · Sasha Pometko</div>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Section navigation">
+    <a href="#intro"   class="tab-link" data-tab="intro">Who I am</a>
+    <a href="#ai-os"   class="tab-link" data-tab="ai-os">My AI OS</a>
+    <a href="#skills"  class="tab-link" data-tab="skills">Future skills</a>
+    <a href="#hr"      class="tab-link" data-tab="hr">AI in HR</a>
+    <a href="#scale"   class="tab-link" data-tab="scale">Scaling AI</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ====================== TAB 1: WHO I AM ====================== -->
+<section id="intro" class="tab-section" data-tab="intro">
+  <div class="container">
+    <p class="eyebrow">About Sasha</p>
+    <h1 class="hero-statement">Senior Product Designer. AI Enablement. 8+ years across healthcare, edtech, fintech &amp; enterprise.</h1>
+
+    <div class="two-col" style="align-items:start">
+      <div>
+        <!--
+          IMAGE PLACEHOLDER - Headshot
+          Replace the div below with:
+          <img src="assets/sasha.jpg" alt="Sasha Pometko" style="width:100%;border-radius:var(--r-md);object-fit:cover;" />
+        -->
+        <div class="img-placeholder" style="height:340px">
+          <span class="ph-icon">🧑‍💻</span>
+          <span class="ph-label">Headshot</span>
+          <span class="ph-desc">Replace with: &lt;img src="assets/sasha.jpg"&gt;</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:var(--t-body-lg);line-height:1.65;margin-bottom:var(--s-md)">I combine deep product design expertise with DesignOps to build better products - and to make AI a practical part of how teams design and ship.</p>
+        <p>Just accepted a Senior Product Designer role at <strong>Commonwealth Bank of Australia</strong>. Previously, I supported <strong>600+ designers at Atlassian</strong> in adopting AI-driven practices: training programs, global communities of practice, AI agent tooling.</p>
+        <p>I've worked across <strong>healthcare, MedTech, EdTech, SaaS, and now finance</strong> - and published academic research in ACM HCI conferences at UC Santa Cruz.</p>
+        <div class="callout" style="margin-top:var(--s-lg)">
+          <div class="callout-label">Full circle moment 👋</div>
+          <p>I did an internship at Winoa around age 15 - I was on-site at the plant, spent time in the lab sifting through metal pellets. It's really nice to be back talking about the future rather than the factory floor.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num">600+</div><div class="stat-label">designers enabled at Atlassian</div></div>
+      <div class="stat"><div class="stat-num">90%</div><div class="stat-label">reported higher AI confidence after sessions</div></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">AI use cases in the Design Playbook</div></div>
+      <div class="stat"><div class="stat-num">300+</div><div class="stat-label">tech community members in San Sebastián</div></div>
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">years across 5 industries</div></div>
+    </div>
+
+    <h2 class="section-h">Career highlights - click any card to expand</h2>
+    <div class="career-grid">
+      <div class="career-card">
+        <div class="career-card-role">Design &amp; AI Operations</div>
+        <div class="career-card-co">Atlassian · 2025–2026</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Scaled a global AI Design Community of Practice across APAC, EMEA, India, and the Americas - 30% attendance, 90% session relevance, 90% of participants reported increased confidence. Built AI agents for Design Ops and led physical AI labs in San Francisco and Sydney.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">Staff Product Designer</div>
+        <div class="career-card-co">Everyday Speech · 2024–2025</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Launched a 3-year Design System roadmap tied to OKRs, improving cross-functional contribution by 48%. Led product health metrics and ran lean experiments driving feature adoption. Everyday Speech serves 246,000+ children with social-emotional learning tools.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">Senior UX / Freelance</div>
+        <div class="career-card-co">Self-employed · 2022–2024</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>13 educational games with 61,500+ play sessions per year. Reduced game production from 6 to 3 months using generative AI for assets. Increased SaaS onboarding time-to-value from 33% to 69%. Mentored 21 designers, clinicians, and marketers.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">Lead UX / Chief Patient Officer</div>
+        <div class="career-card-co">Lucine · 2021</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Led UX for a VR medical device that reduces pelvic pain from endometriosis by 51% in clinical trials within 15 minutes. Owned ISO 13485 regulatory documentation for French market approval.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">Visiting Research Scholar</div>
+        <div class="career-card-co">UC Santa Cruz · 2020–2021</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Co-created a new method for remote user testing published in the 2021 and 2022 ACM HCI Proceedings (CHI and DIS). Researched playful human-drone interaction and Play-Food design.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">Founder</div>
+        <div class="career-card-co">Tech Connect Donostia · 2023–2025</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Founded the #1 tech community on Meetup.com in San Sebastián - 300+ members, 35 events in two years, covering AI, vibe coding, product design, and game design. First international tech community in a city where nothing like it existed before.</p></div>
+      </div>
+    </div>
+
+    <!--
+      IMAGE PLACEHOLDER - Company logo row
+      Replace with a row of logos: Atlassian, Everyday Speech, Commonwealth Bank, UC Santa Cruz, Tech Connect Donostia
+    -->
+    <div class="img-placeholder" style="height:72px">
+      <span class="ph-label">Company logo row: Atlassian · Everyday Speech · Commonwealth Bank · UC Santa Cruz · Tech Connect Donostia</span>
+      <span class="ph-desc">Replace with &lt;img&gt; tags or SVG logos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TAB 2: MY AI OS ====================== -->
+<section id="ai-os" class="tab-section" data-tab="ai-os">
+  <div class="container">
+    <p class="eyebrow">My AI OS</p>
+    <h1 class="hero-statement smaller">I don't just use AI. I built a system that knows me.</h1>
+
+    <p style="font-size:var(--t-body-lg);max-width:780px;margin-bottom:var(--s-xl);line-height:1.65">Most people use AI like they Google things - ask a question, get an answer, move on. I built a personal assistant with full context on everything I'm working on, so every output is actually relevant to my situation - not generic filler.</p>
+
+    <!--
+      IMAGE PLACEHOLDER - Personal OS architecture diagram
+      A central "AI brain" node connecting outward to:
+      Projects / Stakeholders / Slack-Teams / Writing Style / Skills-Workflows / External Sources
+    -->
+    <div class="img-placeholder" style="height:260px;margin-bottom:var(--s-xl)">
+      <span class="ph-icon">🧠</span>
+      <span class="ph-label">Personal OS Architecture Diagram</span>
+      <span class="ph-desc">Central AI hub with spokes to: Projects, Stakeholders, Slack/Teams, Writing Style, Repeatable Skills, External Sources (Drive, Confluence)</span>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h2 class="section-h" style="margin-top:0">What lives in my OS</h2>
+        <ul style="font-size:var(--t-body-sm);line-height:1.9">
+          <li><strong>All active projects</strong> and their context</li>
+          <li><strong>Stakeholders</strong> - who they are, roles, communication style</li>
+          <li><strong>My writing style</strong> and preferred tone</li>
+          <li><strong>Repeatable skills</strong> - e.g. a workflow that analyzes user interviews the same way every time</li>
+          <li><strong>Links to sources of truth</strong> - it knows to pull a specific Drive folder before drafting a strategy, so the output is grounded in real context</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="section-h" style="margin-top:0">Voice-first with Wispr Flow</h2>
+        <p style="font-size:var(--t-body-sm)">I don't type anymore - I use Wispr Flow, a voice transcription app. One keypress and everything I say is instantly transcribed, anywhere I'm typing.</p>
+        <div class="callout" style="margin-top:var(--s-sm)">
+          <div class="callout-label">Counterintuitive insight</div>
+          <p>Typing actually restricts your thinking. When you type, you shortcut the cognitive process. When you speak, you're forced to reason out loud first. AI's job is just to capture and format those thoughts - not to create them for you.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-h">How I made this presentation with AI - click each step</h2>
+
+    <div class="step-flow" id="pres-steps">
+      <div class="step-item" data-step="0">
+        <div class="step-num">1</div>
+        <div class="step-label">Phone call</div>
+        <div class="step-detail">Recorded a planning call with the organiser to align on content, goals, and audience needs</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step-item" data-step="1">
+        <div class="step-num">2</div>
+        <div class="step-label">Transcribe</div>
+        <div class="step-detail">AI transcribed the full recording automatically - no manual notes, no re-listening</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step-item" data-step="2">
+        <div class="step-num">3</div>
+        <div class="step-label">Recap</div>
+        <div class="step-detail">Pasted transcript into Claude → generated a structured recap of key decisions, structure, and context</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step-item" data-step="3">
+        <div class="step-num">4</div>
+        <div class="step-label">Voice notes</div>
+        <div class="step-detail">Dictated talking points for each section - AI logged everything into a structured markdown file</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step-item" data-step="4">
+        <div class="step-num">5</div>
+        <div class="step-label">Design brief</div>
+        <div class="step-detail">Gave AI a design.md with styling rules, components, and the existing design system to follow</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step-item" data-step="5">
+        <div class="step-num">6</div>
+        <div class="step-label">This page ✓</div>
+        <div class="step-detail">AI generated this full HTML presentation from the markdown - no slide deck, no design tool, no formatting time</div>
+      </div>
+    </div>
+
+    <h2 class="section-h">3 agents running every morning at 8am</h2>
+    <div class="agent-cards">
+      <div class="agent-card">
+        <div class="agent-emoji">✍️</div>
+        <div class="agent-name">The Drafter</div>
+        <p class="agent-desc">For any task involving research - "find a surf coach in Bondi", "look into visa conditions" - Claude does the work and writes it straight into the task description field. By the time I open it, the thinking is already done.</p>
+      </div>
+      <div class="agent-card">
+        <div class="agent-emoji">⭐</div>
+        <div class="agent-name">The Prioritiser</div>
+        <p class="agent-desc">I told Claude what actually matters to me right now: visa, work, health, finances. Anything that maps to those areas gets auto-flagged as Priority 1. No manual triage needed.</p>
+      </div>
+      <div class="agent-card">
+        <div class="agent-emoji">🏷️</div>
+        <div class="agent-name">The Labeller</div>
+        <p class="agent-desc">Claude reads each new inbox task and applies the right label from my full label list based on the content. I add tasks messily throughout the day - the system organizes them overnight.</p>
+      </div>
+    </div>
+    <p style="font-size:var(--t-body-sm);color:#555;margin-bottom:var(--s-xl)"><strong>How?</strong> Got a Todoist API key, pointed Claude at it, described my system in plain language. That's it.</p>
+
+    <!--
+      IMAGE PLACEHOLDER - Todoist × Claude screenshot
+      Show tasks with research pre-filled in descriptions, priority flags, labels applied
+    -->
+    <div class="img-placeholder" style="height:180px;margin-bottom:var(--s-xl)">
+      <span class="ph-icon">📋</span>
+      <span class="ph-label">Todoist × Claude - screenshot or mockup</span>
+      <span class="ph-desc">Tasks with research pre-written in description field, priority stars, labels auto-applied</span>
+    </div>
+
+    <h2 class="section-h">Other things I automate - click to expand</h2>
+    <div class="career-grid">
+      <div class="career-card">
+        <div class="career-card-role">📧 Email drafting</div>
+        <div class="career-card-co">In my voice, instantly</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Paste context → AI writes the email in my voice and tone. I review and send. No blank page, no rewriting from scratch. Works especially well for difficult or diplomatic messages.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">📄 Contract analysis</div>
+        <div class="career-card-co">Risk flags in minutes</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Upload a contract → AI flags key clauses, risks, deadlines, and anything unusual. What used to take an hour of careful reading takes 5 minutes. I still verify - but I start from a highlighted summary instead of a blank read.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">⚡ Bulk data tasks</div>
+        <div class="career-card-co">Hours → under an hour</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>For a conference with 1,000+ participants and 100 speakers - needed names, emails, and headshots for all. Used AI to scan Slack, find titles, approximate emails, and auto-download images. A full day of manual work done before lunch.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">💬 Slack intelligence</div>
+        <div class="career-card-co">Weekly signal from the noise</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Set up agents to scan dozens of Slack channels, write recaps categorized by AI use case type, and compile them into a running document. What would have taken days of reading → an automated weekly summary I can actually act on.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">💻 Vibe coding</div>
+        <div class="career-card-co">No-code prototyping</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Describe what you want → AI writes the code → fully interactive prototype in minutes. Used at Atlassian to build interactive training guides that are 10× more engaging than documentation. You don't need to understand the code.</p></div>
+      </div>
+      <div class="career-card">
+        <div class="career-card-role">🤖 Knowledge agent</div>
+        <div class="career-card-co">Self-serve answers 24/7</div>
+        <div class="career-card-hint">Click to expand →</div>
+        <div class="career-card-outcome"><p>Built a Slack agent at Atlassian connected to a curated Confluence knowledge base. People ask "how do I get access to X?" → agent answers instantly from verified sources only. No more pinging a human for the same questions repeatedly.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TAB 3: FUTURE SKILLS ====================== -->
+<section id="skills" class="tab-section" data-tab="skills">
+  <div class="container">
+    <p class="eyebrow">Skills of the Future</p>
+    <h1 class="hero-statement smaller">You don't need to be a tech expert. But some things are becoming non-negotiable.</h1>
+    <p style="font-size:var(--t-body-sm);color:#777;font-style:italic;margin-bottom:var(--s-xl)">Personal observations from my experience - not a universal prescription. Click any card to read the full thought.</p>
+
+    <div class="before-after">
+      <div class="panel before">
+        <div class="panel-label">Before - The process-first world</div>
+        <p>Following the right steps was enough. User research → brainstorm → ideation → wireframes → implementation. Each phase: weeks. Completing the steps correctly = doing your job well.</p>
+      </div>
+      <div class="panel after">
+        <div class="panel-label">Now - The outcome-first world</div>
+        <p>All those steps now take 20 minutes. What companies care about: <strong>Did you have the right strategy? Did it deliver results?</strong> The process is table stakes. Outcomes are everything.</p>
+      </div>
+    </div>
+
+    <div class="skill-grid">
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">🎯</span>
+          <span class="skill-title">Outcomes over process</span>
+          <span class="skill-toggle">▾</span>
+        </div>
+        <div class="skill-summary">The quiet disappearance of roles that follow process without creating meaningful impact.</div>
+        <div class="skill-detail"><p>AI has made process execution fast and cheap. If your work is mostly about completing steps correctly rather than producing real impact, that work is increasingly automatable. The employees who thrive will be the ones who can <strong>identify what outcome is actually needed</strong> and use AI to get there. Not those who just execute tasks well.</p></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">🔌</span>
+          <span class="skill-title">Getting (gently) technical</span>
+          <span class="skill-toggle">▾</span>
+        </div>
+        <div class="skill-summary">Building your own productivity system requires getting comfortable with configuration - not as scary as it sounds.</div>
+        <div class="skill-detail"><p>Non-technical employees will increasingly need to: set up their own AI OS, create automations between tools, connect third-party services. <strong>What is an MCP?</strong> Think of it as a "plug" that lets your AI tool read from and write to other systems - your HR software, your calendar - without copy-pasting. The goal isn't to become a developer. It's to be less afraid of configuration.</p></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">⚙️</span>
+          <span class="skill-title">Automation literacy</span>
+          <span class="skill-toggle">▾</span>
+        </div>
+        <div class="skill-summary">Spotting where technology can close the gap - less about coding, more about systems thinking.</div>
+        <div class="skill-detail"><p>A lot of jobs today are largely: inputting data, connecting data from different places, reporting on data. These are exactly what AI automates best. The skill that will matter: <strong>being able to look at a workflow and ask "which of these steps should a human actually be doing?"</strong> This is process analysis, not programming.</p></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">🧠</span>
+          <span class="skill-title">Critical thinking &amp; cognitive resilience</span>
+          <span class="skill-toggle">▾</span>
+        </div>
+        <div class="skill-summary">The effects of AI on cognitive decline are starting to be documented. Heavy chatbot use correlates with reduced strategic thinking.</div>
+        <div class="skill-detail"><p>If you outsource your thinking to AI, you risk atrophying the judgment muscles that make you good at your job. The key skill: knowing the difference between <strong>using AI to support non-strategic work</strong> vs. letting it replace your thinking. My practice: voice dictation forces me to form a thought before asking AI. It captures and formats my thinking - it doesn't create it.</p></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">💬</span>
+          <span class="skill-title">Prompt craft</span>
+          <span class="skill-toggle">▾</span>
+        </div>
+        <div class="skill-summary">How you communicate with AI determines the quality of what you get back. This is a learnable, high-ROI skill.</div>
+        <div class="skill-detail"><p>When asking AI to review a contract, tell it not just what to change - but also <strong>what should stay exactly as it is</strong>, to avoid hallucinations. Always include examples of good and bad outputs. Give it context about who you are and what "good" looks like. The better your prompt, the less time you spend editing the output.</p></div>
+      </div>
+
+    </div>
+
+    <h2 class="section-h">New roles companies will need</h2>
+    <div class="two-col">
+      <div class="callout">
+        <div class="callout-label">🏆 AI Champions</div>
+        <p>People who have done the work themselves - not just read about it. Good teachers and advocates who create genuine energy around AI adoption. They're not "the AI person" - they're a colleague who can show you how they actually do it. They lead by example, not by title.</p>
+      </div>
+      <div class="callout muted">
+        <div class="callout-label">🔄 Change Managers for AI</div>
+        <p>Rolling out a fundamental change to how people work, at speed, across a whole organization - this is an industrial revolution. You cannot expect people to figure it out on their own. Dedicated change management support is essential to bring people along and make the transition stick.</p>
+      </div>
+    </div>
+
+    <!--
+      IMAGE PLACEHOLDER - Cognitive resilience / brain atrophy visual
+      Subtle illustration: a brain with "use it or lose it" concept - AI as support vs. replacement
+    -->
+    <div class="img-placeholder" style="height:140px;margin-top:var(--s-lg)">
+      <span class="ph-icon">🧠</span>
+      <span class="ph-label">Cognitive resilience visual</span>
+      <span class="ph-desc">AI as a support for non-strategic work vs. AI replacing thinking entirely. Thoughtful, non-alarmist tone.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TAB 4: AI IN HR ====================== -->
+<section id="hr" class="tab-section" data-tab="hr">
+  <div class="container">
+    <p class="eyebrow">AI in Your HR World</p>
+    <h1 class="hero-statement smaller">From a prompt library to a system that runs itself.</h1>
+
+    <div class="callout info" style="margin-bottom:var(--s-xl)">
+      <div class="callout-label">A note before we start</div>
+      <p>I don't have deep HR expertise - what follows is one way to think about this based on what's technically possible. Think of it as a starting point, not a blueprint. I'd love to hear from you whether it resonates with your real challenges.</p>
+    </div>
+
+    <p><strong>A well-crafted list of AI prompts is a great first step.</strong> But it's still manual - you have to remember to use it, find the right prompt, paste in the context, and act on the output. Every single time.</p>
+    <p>The next level is designing a <strong>system</strong> where most of this just happens - triggered automatically, context already loaded, output delivered where you need it.</p>
+
+    <h2 class="section-h">The architecture: two tools, two jobs</h2>
+
+    <div class="arch-diagram">
+      <div class="arch-layer layer-copilot">
+        <div class="arch-layer-label">🟣 Layer 1 - Copilot (your integration &amp; automation hub)</div>
+        <div class="arch-tools">
+          <div class="arch-tool">📧 Outlook</div>
+          <div class="arch-tool">💬 Teams</div>
+          <div class="arch-tool">📄 Word</div>
+          <div class="arch-tool">📊 Excel</div>
+          <div class="arch-tool">📁 SharePoint</div>
+          <div class="arch-tool">🗂️ HR System</div>
+          <div class="arch-tool">📅 Calendar</div>
+        </div>
+        <p style="font-size:var(--t-body-sm);color:#555;margin-top:var(--s-sm);margin-bottom:0">Lives inside the tools you already use. Acts directly - no copy-pasting. Holds your 10-country profiles, open projects, and recurring workflow templates.</p>
+      </div>
+
+      <div class="arch-arrow">⇅</div>
+
+      <div class="arch-layer layer-chatgpt">
+        <div class="arch-layer-label">🟢 Layer 2 - ChatGPT (your text generation engine)</div>
+        <div class="arch-tools">
+          <div class="arch-tool">📝 Job descriptions</div>
+          <div class="arch-tool">🔍 CV screening</div>
+          <div class="arch-tool">📋 Interview kits</div>
+          <div class="arch-tool">📊 Feedback synthesis</div>
+          <div class="arch-tool">🌍 Policy localization</div>
+          <div class="arch-tool">⚠️ Payroll risk analysis</div>
+        </div>
+        <p style="font-size:var(--t-body-sm);color:#555;margin-top:var(--s-sm);margin-bottom:0">Handles heavy text work: drafting, analyzing, synthesizing, localizing. Outputs fed back into Copilot workflows.</p>
+      </div>
+
+      <div class="arch-arrow">⇅</div>
+
+      <div class="arch-hr">
+        <div class="arch-hr-box">👩‍💼 You - reviewing, deciding, validating. Not doing the steps.</div>
+      </div>
+    </div>
+
+    <h2 class="section-h">Example: hiring a new role - step by step</h2>
+    <p style="font-size:var(--t-body-sm);color:#555;margin-bottom:var(--s-md)">Click through each step to see how the workflow flows - and who does what.</p>
+
+    <div class="workflow-stepper">
+      <div class="workflow-progress" id="wf-progress"></div>
+      <div class="workflow-step-content" id="wf-content"></div>
+      <div class="workflow-nav">
+        <button class="workflow-nav-btn" id="wf-prev">← Previous</button>
+        <span class="workflow-counter" id="wf-counter"></span>
+        <button class="workflow-nav-btn" id="wf-next">Next →</button>
+      </div>
+    </div>
+
+    <!--
+      IMAGE PLACEHOLDER - Recruitment workflow diagram
+      9-step flow color-coded by actor: blue = Copilot, green = ChatGPT, yellow = HR decision
+    -->
+    <div class="img-placeholder" style="height:120px;margin:var(--s-lg) 0">
+      <span class="ph-icon">🔁</span>
+      <span class="ph-label">Recruitment workflow diagram</span>
+      <span class="ph-desc">9-step flow, color-coded: 🟣 Copilot automated · 🟢 ChatGPT generates · 🟡 HR reviews/decides</span>
+    </div>
+
+    <div class="two-col" style="margin-top:var(--s-xl);align-items:start">
+      <div>
+        <h2 class="section-h" style="margin-top:0">The morning briefing agent</h2>
+        <p style="font-size:var(--t-body-sm)">One of the highest-ROI automations for a solo HR person covering 10 countries: an agent that runs every morning and prepares your day before you open your laptop.</p>
+        <p style="font-size:var(--t-body-sm)">Think of it as a junior HR coordinator who has read everything overnight and prepared your briefing - without the headcount cost.</p>
+      </div>
+      <div class="briefing-card">
+        <div class="briefing-time">☀️ Good morning - Wednesday, 8:00 AM</div>
+        <div class="briefing-title">Your HR Briefing</div>
+        <div class="briefing-item">
+          <span class="briefing-icon">🔴</span>
+          <div><div class="briefing-item-label">Compliance deadline</div><div class="briefing-item-val">France - payroll submission due Friday</div></div>
+        </div>
+        <div class="briefing-item">
+          <span class="briefing-icon">📋</span>
+          <div><div class="briefing-item-label">Active recruitments</div><div class="briefing-item-val">3 open · Korea (offer stage) · Germany (interview) · Brazil (sourcing)</div></div>
+        </div>
+        <div class="briefing-item">
+          <span class="briefing-icon">🧑‍💼</span>
+          <div><div class="briefing-item-label">Onboarding checkpoints today</div><div class="briefing-item-val">Lucas (AU) - Day 30 check-in due</div></div>
+        </div>
+        <div class="briefing-priority">
+          <div class="briefing-priority-label">⭐ Today's top 3</div>
+          <div class="briefing-priority-item">1. Submit France payroll data</div>
+          <div class="briefing-priority-item">2. Send Korea offer letter</div>
+          <div class="briefing-priority-item">3. Review Brazil shortlist</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:var(--s-xl)">
+      <div class="callout-label">Important caveat</div>
+      <p>AI in HR is powerful for: drafting, structuring, analyzing, synthesizing, prioritizing, communicating, standardizing. It should <strong>not</strong> replace: legal validation, termination decisions, collective labor matters, country-specific compliance interpretation. Use AI to free up your time for exactly those higher-judgment calls - and always validate locally when required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TAB 5: SCALING AI ====================== -->
+<section id="scale" class="tab-section" data-tab="scale">
+  <div class="container">
+    <p class="eyebrow">Scaling AI</p>
+    <h1 class="hero-statement smaller">Individual productivity isn't enough. You need a system.</h1>
+    <p style="font-size:var(--t-body-lg);max-width:780px;margin-bottom:var(--s-xl);line-height:1.65">Based on what I've seen across multiple tech companies - including Atlassian directly. Here's what actually works when you're trying to move an entire organization.</p>
+
+    <h2 class="section-h" style="margin-top:0">Training principles that work</h2>
+    <div class="principle-cards">
+      <div class="principle-card">
+        <div class="principle-num">01</div>
+        <div class="principle-title">Build it internally</div>
+        <p class="principle-desc">Examples in your training must be relevant to people's actual work. Internal creators also become points of contact - employees can follow up directly. External vendors can't do this.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">02</div>
+        <div class="principle-title">Bite-sized &amp; immediate</div>
+        <p class="principle-desc">1–2 minute videos, one tool or workflow each. Low barrier to watch. Always followed by immediate hands-on practice. People learn by doing, not watching.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">03</div>
+        <div class="principle-title">Psychological safety</div>
+        <p class="principle-desc">People need to feel competent, not just informed. Design for confidence through repetition and community - not just tool exposure. Fear and uncertainty are the real blockers.</p>
+      </div>
+    </div>
+
+    <h2 class="section-h">The AI Builder Week model - click between days</h2>
+    <p style="font-size:var(--t-body-sm);color:#555;margin-bottom:var(--s-md)">Every 3–6 months, a 4-day intensive with 4-hour workshops each day.</p>
+
+    <div class="day-tabs">
+      <button class="day-tab active" data-day="1">Day 1 - Inspire</button>
+      <button class="day-tab" data-day="2">Day 2 - Learn</button>
+      <button class="day-tab" data-day="3">Day 3 - Build</button>
+      <button class="day-tab" data-day="4">Day 4 - Showcase</button>
+    </div>
+
+    <div class="day-content active" data-day="1">
+      <span class="day-tag tag-inspire">🌟 Inspire</span>
+      <h3 class="day-heading">Examples from the real world</h3>
+      <p>Show the best AI use cases from across the company - not vendor demos, but real people in your organization doing real things. Add examples from outside the company too.</p>
+      <p>Introduce new tools and workflows you want people to try. Energy-building mode - not tutorial mode. No slides full of features. Stories of impact.</p>
+    </div>
+    <div class="day-content" data-day="2">
+      <span class="day-tag tag-learn">📚 Learn</span>
+      <h3 class="day-heading">Hands-on tutorials</h3>
+      <p>Step-by-step tutorials on the specific tools introduced on Day 1 - led by someone who actually uses them daily, not an external trainer.</p>
+      <p>For global teams: run the same session across multiple time zones. Require prep work beforehand - e.g. a vibe-coded setup guide so people configure their machines in advance. No wasted session time on setup.</p>
+    </div>
+    <div class="day-content" data-day="3">
+      <span class="day-tag tag-build">🔨 Build</span>
+      <h3 class="day-heading">Work on something real</h3>
+      <p>The most important day. Small groups take a project they're <strong>currently working on</strong> and optimize it with AI. The output is directly relevant to their actual work.</p>
+      <p>Key principle: <strong>it's not extra time away from work - it is their work, in an experimental setting.</strong> They leave with something they can use on Monday. This matters for buy-in at every level of the organization.</p>
+    </div>
+    <div class="day-content" data-day="4">
+      <span class="day-tag tag-showcase">🏆 Showcase</span>
+      <h3 class="day-heading">Share, celebrate, sustain</h3>
+      <p>Groups present what they built. Recognition and awards. Momentum to carry forward. This creates the internal story your organization tells itself about AI - built from real people doing real work.</p>
+      <p>These showcases also surface your next wave of champions. The people who built something exciting on Day 3 are your best recruiters for the next cohort.</p>
+    </div>
+
+    <h2 class="section-h">Champions &amp; communities of practice</h2>
+    <div class="two-col">
+      <div>
+        <p style="font-size:var(--t-body-sm)">After big training events, communities of practice keep the momentum alive - regular workshops focused on what people struggled with most, so they can get repetitions in and build real confidence.</p>
+        <p style="font-size:var(--t-body-sm)"><strong>Champions Network:</strong> Identify the highest AI tool users. Invite them to run weekly office hours. Make them go-to facilitators for future training. They lead by example - as colleagues, not "the AI person."</p>
+        <p style="font-size:var(--t-body-sm)"><strong>Async sharing channels:</strong> A dedicated Teams channel where people post short screen recordings of experiments. Reactions and comments create organic momentum. Normalise experimentation and make it visible across the org.</p>
+      </div>
+      <!--
+        IMAGE PLACEHOLDER - Champions network diagram
+        Network graph: central champion nodes connected to team clusters across functions.
+        Shows peer-to-peer spread vs top-down mandate.
+      -->
+      <div class="img-placeholder" style="min-height:200px">
+        <span class="ph-icon">🌐</span>
+        <span class="ph-label">Champions network diagram</span>
+        <span class="ph-desc">Champion nodes at center, connected to team clusters across different functions. Peer-to-peer spread, not top-down.</span>
+      </div>
+    </div>
+
+    <h2 class="section-h">The bottleneck problem - the thing everyone misses</h2>
+
+    <div class="bottleneck-visual">
+      <div class="pipeline-box boosted">
+        <div class="pipeline-box-label">Designer</div>
+        <div class="pipeline-box-stat">1 screen/week<br>→ <strong>10 screens/week 🚀</strong></div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-box bottleneck">
+        <div class="pipeline-box-label">Engineering</div>
+        <div class="pipeline-box-stat">Still 1 build/week<br><strong>🚧 Backlog explodes</strong></div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-box">
+        <div class="pipeline-box-label">Shipped</div>
+        <div class="pipeline-box-stat">Same pace as before.<br>Nothing changed.</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:var(--s-md)">
+      <div class="callout-label">The insight</div>
+      <p>Making one person dramatically more productive with AI is easy. But if the next step in the process hasn't been sped up too, you've just moved the bottleneck. <strong>AI adoption at scale requires thinking about the whole workflow - not just individual roles.</strong> This requires cross-functional coordination, which is exactly why HR and ops leaders are so central to getting this right.</p>
+    </div>
+
+    <div class="callout muted" style="margin-top:var(--s-md)">
+      <div class="callout-label">Closing thought</div>
+      <p>This is a change management problem as much as a technology problem. You're not rolling out a new tool - you're fundamentally changing how people work. Treat it accordingly and you'll get results. Treat it like a software deployment and you'll have a very expensive shelf product.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Sasha Pometko · Winoa Global HR Summit · June 2026 · <a href="https://linkedin.com/in/sasha-pometko" target="_blank">linkedin.com/in/sasha-pometko</a></p>
+</footer>
+
+<script>
+/* ============================================================
+   Tab routing
+   ============================================================ */
+const TABS = ["intro","ai-os","skills","hr","scale"];
+
+function activateTab(id) {
+  if (!TABS.includes(id)) id = TABS[0];
+  document.querySelectorAll(".tab-link").forEach(el =>
+    el.classList.toggle("active", el.dataset.tab === id));
+  document.querySelectorAll(".tab-section").forEach(el =>
+    el.classList.toggle("active", el.dataset.tab === id));
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+function tabFromHash() {
+  const h = location.hash.replace(/^#/, "");
+  return TABS.includes(h) ? h : TABS[0];
+}
+window.addEventListener("hashchange", () => activateTab(tabFromHash()));
+document.querySelectorAll(".tab-link").forEach(el =>
+  el.addEventListener("click", e => {
+    e.preventDefault();
+    history.pushState(null, "", "#" + el.dataset.tab);
+    activateTab(el.dataset.tab);
+  })
+);
+
+/* ============================================================
+   Career + automation cards (expand/collapse)
+   ============================================================ */
+document.querySelectorAll(".career-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const wasActive = card.classList.contains("active");
+    document.querySelectorAll(".career-card").forEach(c => {
+      c.classList.remove("active");
+      const h = c.querySelector(".career-card-hint");
+      if (h) h.textContent = "Click to expand →";
+    });
+    if (!wasActive) {
+      card.classList.add("active");
+      const h = card.querySelector(".career-card-hint");
+      if (h) h.textContent = "Click to collapse ↑";
+    }
+  });
+});
+
+/* ============================================================
+   Presentation step flow
+   ============================================================ */
+document.querySelectorAll("#pres-steps .step-item").forEach(step => {
+  step.addEventListener("click", () => {
+    document.querySelectorAll("#pres-steps .step-item").forEach(s => s.classList.remove("active"));
+    step.classList.add("active");
+  });
+});
+
+/* ============================================================
+   Skill cards (expand/collapse, one open at a time)
+   ============================================================ */
+document.querySelectorAll(".skill-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const wasActive = card.classList.contains("active");
+    document.querySelectorAll(".skill-card").forEach(c => c.classList.remove("active"));
+    if (!wasActive) card.classList.add("active");
+  });
+});
+
+/* ============================================================
+   Recruitment workflow stepper
+   ============================================================ */
+const WF_STEPS = [
+  { actor:"human",   label:"You (HR)",   title:"Trigger: open a new recruitment project",          desc:"Tag it with role + country in Copilot. That's your only input to kick off the entire flow." },
+  { actor:"copilot", label:"Copilot",    title:"Auto-load country context",                        desc:"Copilot pulls your country profile from the knowledge base: legislation, salary benchmarks, sourcing channels, notice period norms. All pre-loaded - nothing to look up." },
+  { actor:"chatgpt", label:"ChatGPT",    title:"Generate the job description",                     desc:"ChatGPT drafts the full JD using role context + country profile. You review and approve in ~10 minutes instead of writing from scratch." },
+  { actor:"copilot", label:"Copilot",    title:"Post to job boards",                               desc:"Copilot posts to the relevant channels or drafts the posting email, ready to send. One click instead of logging into multiple platforms." },
+  { actor:"chatgpt", label:"ChatGPT",    title:"Screen and rank CVs",                              desc:"CVs come in → ChatGPT screens against predefined criteria, ranks candidates, flags risks (salary mismatch, instability, relocation concerns). You get a shortlist with explanations - not a pile of PDFs." },
+  { actor:"copilot", label:"Copilot",    title:"Generate interview kit and schedule",              desc:"Copilot auto-generates a structured interview kit and sends it to interviewers via Teams. Interview reminders scheduled automatically." },
+  { actor:"chatgpt", label:"ChatGPT",    title:"Synthesize interview feedback",                    desc:"Interviewers submit notes → ChatGPT synthesizes all feedback into a hiring recommendation: consensus points, risks, disagreements, suggested decision. No more chasing email threads." },
+  { actor:"human",   label:"You (HR)",   title:"You make the decision",                            desc:"Based on the synthesized recommendation. This is where your judgment matters - the system has done all the prep work. You decide." },
+  { actor:"copilot", label:"Copilot",    title:"Trigger onboarding",                               desc:"Decision made → Copilot generates the 30-60-90 day plan for that country, creates all calendar invites, drafts the welcome email, and sends manager instructions. Automatically." }
+];
+
+let currentStep = 0;
+
+function renderWorkflow() {
+  const progress  = document.getElementById("wf-progress");
+  const content   = document.getElementById("wf-content");
+  const counter   = document.getElementById("wf-counter");
+  const prevBtn   = document.getElementById("wf-prev");
+  const nextBtn   = document.getElementById("wf-next");
+
+  progress.innerHTML = WF_STEPS.map((_, i) =>
+    `<div class="progress-dot ${i < currentStep ? "done" : i === currentStep ? "active" : ""}"></div>`
+  ).join("");
+
+  const s = WF_STEPS[currentStep];
+  const actorEmoji = s.actor === "copilot" ? "🟣" : s.actor === "chatgpt" ? "🟢" : "🟡";
+  content.innerHTML = `
+    <span class="workflow-actor actor-${s.actor}">${actorEmoji} ${s.label}</span>
+    <div class="workflow-step-title">${s.title}</div>
+    <div class="workflow-step-desc">${s.desc}</div>
+  `;
+  counter.textContent = `Step ${currentStep + 1} of ${WF_STEPS.length}`;
+  prevBtn.disabled = currentStep === 0;
+  nextBtn.disabled = currentStep === WF_STEPS.length - 1;
+}
+
+document.getElementById("wf-prev").addEventListener("click", () => { if (currentStep > 0) { currentStep--; renderWorkflow(); } });
+document.getElementById("wf-next").addEventListener("click", () => { if (currentStep < WF_STEPS.length - 1) { currentStep++; renderWorkflow(); } });
+
+/* ============================================================
+   Builder Week day tabs
+   ============================================================ */
+document.querySelectorAll(".day-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    const day = tab.dataset.day;
+    document.querySelectorAll(".day-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".day-content").forEach(c => c.classList.remove("active"));
+    tab.classList.add("active");
+    document.querySelector(`.day-content[data-day="${day}"]`).classList.add("active");
+  });
+});
+
+/* ============================================================
+   Init
+   ============================================================ */
+activateTab(tabFromHash());
+renderWorkflow();
+</script>
+</body>
+</html>
