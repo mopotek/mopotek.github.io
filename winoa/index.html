@@ -223,8 +223,49 @@
     /* === FOOTER === */
     .site-footer { padding: var(--s-md) var(--s-xl); border-top: 1px solid var(--c-border); font-size: var(--t-body-sm); color: #777; text-align: center; }
 
+    /* === OS ARCHITECTURE DIAGRAM === */
+    .os-arch { background: #0F172A; border-radius: var(--r-lg); padding: var(--s-xl); margin-bottom: var(--s-xl); color: white; }
+    .os-brain-wrap { display: flex; justify-content: center; margin-bottom: var(--s-lg); }
+    .os-brain { background: var(--c-primary); color: var(--c-on-primary); border-radius: var(--r-lg); padding: var(--s-md) var(--s-xl); text-align: center; display: inline-flex; flex-direction: column; align-items: center; gap: 4px; min-width: 220px; }
+    .os-brain-emoji { font-size: 36px; line-height: 1; }
+    .os-brain-name { font-size: var(--t-headline-sm); font-weight: 800; color: var(--c-on-primary); }
+    .os-brain-sub { font-size: var(--t-body-sm); font-weight: 600; color: #555; }
+    .os-arrow-row { display: flex; justify-content: center; gap: 0; margin-bottom: var(--s-sm); }
+    .os-arrow { color: #334155; font-size: 22px; flex: 1; text-align: center; }
+    .os-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-sm); margin-bottom: var(--s-sm); }
+    .os-col { background: #1E293B; border-radius: var(--r-md); padding: var(--s-md); border-top: 3px solid; }
+    .os-col.col-persona { border-color: #818CF8; }
+    .os-col.col-memory { border-color: #34D399; }
+    .os-col.col-skills { border-color: #FB923C; }
+    .os-col-icon { font-size: 24px; margin-bottom: 6px; }
+    .os-col-title { font-weight: 800; font-size: var(--t-body-md); margin-bottom: 4px; color: white; }
+    .os-col-sub { font-size: var(--t-label-sm); color: #94A3B8; margin-bottom: var(--s-sm); }
+    .os-col-items { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .os-col-items li { font-size: var(--t-label-sm); color: #CBD5E1; display: flex; align-items: flex-start; gap: 6px; }
+    .os-col-items li::before { content: "·"; color: #475569; flex-shrink: 0; }
+    .os-integrations-row { display: flex; justify-content: center; }
+    .os-integrations { background: #1E293B; border-radius: var(--r-md); padding: var(--s-md) var(--s-xl); border-top: 3px solid #38BDF8; width: 100%; }
+    .os-int-title { font-weight: 800; font-size: var(--t-body-sm); color: white; margin-bottom: var(--s-sm); display: flex; align-items: center; gap: var(--s-xs); }
+    .os-int-chips { display: flex; flex-wrap: wrap; gap: var(--s-xs); }
+    .os-int-chip { background: #0F172A; border-radius: var(--r-full); padding: 4px 12px; font-size: var(--t-label-sm); color: #94A3B8; font-weight: 600; }
+
+    /* === CHIPS === */
+    .chip-input-row { display: flex; gap: var(--s-sm); margin-top: var(--s-md); }
+    .chip-input-row input { flex: 1; padding: 10px var(--s-sm); border: 1px solid var(--c-border); border-radius: var(--r-full); font-family: var(--font); font-size: var(--t-body-sm); outline: none; transition: border-color 120ms; }
+    .chip-input-row input:focus { border-color: var(--c-secondary); }
+    .chip-input-row button { padding: 10px var(--s-lg); border-radius: var(--r-full); background: var(--c-secondary); color: white; border: none; font-weight: 700; font-size: var(--t-body-sm); transition: background 120ms; }
+    .chip-input-row button:hover { background: #162c4a; }
+    .chips-area { display: flex; flex-wrap: wrap; gap: var(--s-xs); margin-top: var(--s-md); min-height: 36px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px 6px 14px; background: var(--c-primary); color: var(--c-on-primary); border-radius: var(--r-full); font-size: var(--t-body-sm); font-weight: 600; animation: chipIn 200ms ease; }
+    .chip-remove { background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: var(--r-full); color: var(--c-on-primary); opacity: 0.5; font-size: 14px; line-height: 1; transition: opacity 120ms, background 120ms; }
+    .chip-remove:hover { opacity: 1; background: rgba(0,0,0,0.12); }
+    @keyframes chipIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+    .chips-empty { font-size: var(--t-body-sm); color: #aaa; font-style: italic; }
+
     /* === RESPONSIVE === */
     @media (max-width: 800px) {
+      .os-columns { grid-template-columns: 1fr; }
+      .os-arrow-row .os-arrow:not(:first-child) { display: none; }
       .site-header { padding: var(--s-sm); flex-direction: column; align-items: flex-start; }
       .tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: var(--s-xs); }
       .tab-link { flex-shrink: 0; }
@@ -246,15 +287,40 @@
     </div>
   </div>
   <nav class="tabs" aria-label="Section navigation">
+    <a href="#welcome" class="tab-link" data-tab="welcome">Welcome</a>
     <a href="#intro"   class="tab-link" data-tab="intro">Who I am</a>
     <a href="#ai-os"   class="tab-link" data-tab="ai-os">My AI OS</a>
     <a href="#skills"  class="tab-link" data-tab="skills">Future skills</a>
-    <a href="#hr"      class="tab-link" data-tab="hr">AI in HR</a>
     <a href="#scale"   class="tab-link" data-tab="scale">Scaling AI</a>
+    <a href="#hr"      class="tab-link" data-tab="hr">AI in HR</a>
   </nav>
 </header>
 
 <main>
+
+<!-- ====================== TAB 0: WELCOME ====================== -->
+<section id="welcome" class="tab-section" data-tab="welcome">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:var(--s-xl)">
+
+    <p class="eyebrow">Winoa Global HR Summit · June 2026</p>
+    <h1 class="hero-statement" style="max-width:780px;margin-bottom:var(--s-sm)">AI & The Future of Work</h1>
+    <p style="font-size:var(--t-body-lg);color:#555;margin-bottom:var(--s-xl)">with Sasha Pometko — Senior Product Designer & AI Enablement</p>
+
+    <p style="font-size:var(--t-headline-lg);font-weight:800;letter-spacing:0.01em;color:var(--c-secondary);margin-bottom:var(--s-xl)">shorturl.at/wVw9S</p>
+    <div style="width:100%;max-width:680px;background:var(--c-surface-muted);border-radius:var(--r-lg);padding:var(--s-xl) var(--s-xl) var(--s-lg);margin-bottom:var(--s-xl)">
+      <p style="font-size:var(--t-title-md);font-weight:700;margin-bottom:var(--s-lg)">Have you used AI this week? Drop what for.</p>
+      <div class="chip-input-row">
+        <input type="text" id="ice-input" placeholder="e.g. Summarising meeting notes..." maxlength="80" />
+        <button id="ice-submit">Add</button>
+      </div>
+      <div class="chips-area" id="ice-chips-area" style="margin-top:var(--s-md);justify-content:center">
+        <span class="chips-empty">Be the first to answer...</span>
+      </div>
+    </div>
+
+    <p style="font-size:var(--t-body-sm);color:#aaa">Answers appear live for everyone</p>
+  </div>
+</section>
 
 <!-- ====================== TAB 1: WHO I AM ====================== -->
 <section id="intro" class="tab-section" data-tab="intro">
@@ -267,13 +333,9 @@
         <!--
           IMAGE PLACEHOLDER - Headshot
           Replace the div below with:
-          <img src="assets/sasha.jpg" alt="Sasha Pometko" style="width:100%;border-radius:var(--r-md);object-fit:cover;" />
         -->
-        <div class="img-placeholder" style="height:340px">
-          <span class="ph-icon">🧑‍💻</span>
-          <span class="ph-label">Headshot</span>
-          <span class="ph-desc">Replace with: &lt;img src="assets/sasha.jpg"&gt;</span>
-        </div>
+          <img src="assets/sasha.jpeg" alt="Sasha Pometko" style="height:100%;border-radius:var(--r-md);object-fit:cover;" />
+
       </div>
       <div>
         <p style="font-size:var(--t-body-lg);line-height:1.65;margin-bottom:var(--s-md)">I combine deep product design expertise with DesignOps to build better products - and to make AI a practical part of how teams design and ship.</p>
@@ -286,14 +348,6 @@
       <p>I did an internship at Winoa around age 15 - I was on-site at the plant, spent time in the lab sifting through metal pellets. It's really nice to be back talking with you all today.</p>
     </div>
 
-    <!-- Stats -->
-    <div class="stats-bar">
-      <div class="stat"><div class="stat-num">600+</div><div class="stat-label">designers enabled at Atlassian</div></div>
-      <div class="stat"><div class="stat-num">90%</div><div class="stat-label">reported higher AI confidence after sessions</div></div>
-      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">AI use cases in the Design Playbook</div></div>
-      <div class="stat"><div class="stat-num">300+</div><div class="stat-label">tech community members in San Sebastián</div></div>
-      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">years across 5 industries</div></div>
-    </div>
 
     <h2 class="section-h">Career highlights</h2>
     <div class="career-grid">
@@ -335,14 +389,6 @@
       </div>
     </div>
 
-    <!--
-      IMAGE PLACEHOLDER - Company logo row
-      Replace with a row of logos: Atlassian, Everyday Speech, Commonwealth Bank, UC Santa Cruz, Tech Connect Donostia
-    -->
-    <div class="img-placeholder" style="height:72px">
-      <span class="ph-label">Company logo row: Atlassian · Everyday Speech · Commonwealth Bank · UC Santa Cruz · Tech Connect Donostia</span>
-      <span class="ph-desc">Replace with &lt;img&gt; tags or SVG logos</span>
-    </div>
   </div>
 </section>
 
@@ -352,30 +398,102 @@
     <p class="eyebrow">My AI OS</p>
     <h1 class="hero-statement smaller">I don't just use AI. I built a system that knows me.</h1>
 
-    <p style="font-size:var(--t-body-lg);max-width:780px;margin-bottom:var(--s-xl);line-height:1.65">Most people use AI like they Google things - ask a question, get an answer, move on. I built a personal assistant with full context on everything I'm working on, so every output is actually relevant to my situation - not generic filler.</p>
+    <p style="font-size:var(--t-body-lg);max-width:780px;margin-bottom:var(--s-md);line-height:1.65">Most people use AI like they Google things - ask a question, get an answer, move on. At Atlassian I built something different: a persistent AI copilot I called <strong>Mango OS</strong> - a senior-level thinking partner that knows my projects, remembers every decision, writes in my voice, and can take action across my tools without me re-explaining anything.</p>
+    <p style="font-size:var(--t-body-sm);color:#555;max-width:780px;margin-bottom:var(--s-xl)">The value isn't the underlying technology - it's the design of the memory architecture, skill system, persona, and workflow integration built on top of it. Same design instincts I apply to products, applied to my own workflow.</p>
 
-    <!--
-      IMAGE PLACEHOLDER - Personal OS architecture diagram
-      A central "AI brain" node connecting outward to:
-      Projects / Stakeholders / Slack-Teams / Writing Style / Skills-Workflows / External Sources
-    -->
-    <div class="img-placeholder" style="height:260px;margin-bottom:var(--s-xl)">
-      <span class="ph-icon">🧠</span>
-      <span class="ph-label">Personal OS Architecture Diagram</span>
-      <span class="ph-desc">Central AI hub with spokes to: Projects, Stakeholders, Slack/Teams, Writing Style, Repeatable Skills, External Sources (Drive, Confluence)</span>
+    <!-- OS ARCHITECTURE DIAGRAM -->
+    <div class="os-arch">
+      <div class="os-brain-wrap">
+        <div class="os-brain">
+          <div class="os-brain-emoji">🥭</div>
+          <div class="os-brain-name">Mango OS</div>
+          <div class="os-brain-sub">Loads all of this at every session start</div>
+        </div>
+      </div>
+
+      <div class="os-arrow-row">
+        <div class="os-arrow">↑</div>
+        <div class="os-arrow">↑</div>
+        <div class="os-arrow">↑</div>
+      </div>
+
+      <div class="os-columns">
+        <div class="os-col col-persona">
+          <div class="os-col-icon">🎭</div>
+          <div class="os-col-title">Identity & Rules</div>
+          <div class="os-col-sub">Who Mango OS is and how it behaves</div>
+          <ul class="os-col-items">
+            <li>SOUL.md — persona contract: senior peer, direct, candid, BLUF-first</li>
+            <li>USER.md — my role, IDs, key pages, working context</li>
+            <li>AGENTS.md — workflows, memory rules, session procedures</li>
+            <li>HEARTBEAT.md — recurring tasks, surfaces overdue items at startup</li>
+          </ul>
+        </div>
+        <div class="os-col col-memory">
+          <div class="os-col-icon">🧠</div>
+          <div class="os-col-title">Memory System</div>
+          <div class="os-col-sub">What it knows and remembers</div>
+          <ul class="os-col-items">
+            <li>MEMORY.md — long-term facts: role, style, projects, decisions</li>
+            <li>Daily logs — auto-written after every session, no manual effort</li>
+            <li>Project files — each project has a _MASTER.md with status, milestones, stakeholders</li>
+            <li>Decisions made in January surfaced accurately in June</li>
+          </ul>
+        </div>
+        <div class="os-col col-skills">
+          <div class="os-col-icon">⚡</div>
+          <div class="os-col-title">Skills</div>
+          <div class="os-col-sub">Modular instruction sets, always active</div>
+          <ul class="os-col-items">
+            <li>✍️ Comms writing — Slack, Confluence, announcements in my voice</li>
+            <li>📋 Meeting notes — structured summaries with decisions & actions</li>
+            <li>🔬 Research synthesis — thematic coding for qualitative data</li>
+            <li>🎥 Loom intake — extract context from video recordings</li>
+            <li>📅 Daily JTBD — morning briefing across Jira, Slack, calendar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="os-arrow-row" style="margin-top:var(--s-sm)">
+        <div class="os-arrow" style="flex:none;width:100%;text-align:center">↑</div>
+      </div>
+
+      <div class="os-integrations-row">
+        <div class="os-integrations">
+          <div class="os-int-title">🔌 Connected tools — reads and writes directly, no copy-pasting</div>
+          <div class="os-int-chips">
+            <span class="os-int-chip">📄 Confluence</span>
+            <span class="os-int-chip">🎯 Jira</span>
+            <span class="os-int-chip">💬 Slack</span>
+            <span class="os-int-chip">📅 Google Calendar</span>
+            <span class="os-int-chip">📁 Google Drive</span>
+            <span class="os-int-chip">✅ Trello</span>
+            <span class="os-int-chip">💻 Local filesystem</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="two-col">
       <div>
-        <h2 class="section-h" style="margin-top:0">What lives in my OS</h2>
-        <ul style="font-size:var(--t-body-sm);line-height:1.9">
-          <li><strong>All active projects</strong> and their context</li>
-          <li><strong>Stakeholders</strong> - who they are, roles, communication style</li>
-          <li><strong>My writing style</strong> and preferred tone</li>
-          <li><strong>Repeatable skills</strong> - e.g. a workflow that analyzes user interviews the same way every time</li>
-          <li><strong>Links to sources of truth</strong> - it knows to pull a specific Drive folder before drafting a strategy, so the output is grounded in real context</li>
-        </ul>
+        <h2 class="section-h" style="margin-top:0">The problem it solved</h2>
+        <p style="font-size:var(--t-body-sm)">Working across 5+ concurrent projects with no memory between AI sessions. Every new chat meant re-explaining context, re-loading stakeholder names, re-orienting the AI to my voice. The cognitive overhead was killing productivity.</p>
+        <div class="callout" style="margin-top:var(--s-sm)">
+          <div class="callout-label">The design question</div>
+          <p>"How might I design an AI system that behaves like a senior colleague who has been working alongside me for months - not a search engine I have to brief every time?"</p>
+        </div>
       </div>
+      <div>
+        <h2 class="section-h" style="margin-top:0">What this looks like in practice</h2>
+        <p style="font-size:var(--t-body-sm)">In one session: restructured a handover Confluence page, updated 5 Jira tickets, drafted 4 channel-specific Slack messages, rewrote an entire brag page by project, added case study outlines for 6 programs. Zero context re-loading. Zero copy-pasting.</p>
+        <div class="callout muted" style="margin-top:var(--s-sm)">
+          <div class="callout-label">Key insight</div>
+          <p>The hardest part of building a personal AI system isn't the prompting - it's the information architecture. The quality of outputs is directly proportional to the quality of the context files it reads. Garbage in, garbage out.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
       <div>
         <h2 class="section-h" style="margin-top:0">Voice-first with Wispr Flow</h2>
         <p style="font-size:var(--t-body-sm)">I don't type anymore - I use Wispr Flow, a voice transcription app. One keypress and everything I say is instantly transcribed, anywhere I'm typing.</p>
@@ -383,6 +501,10 @@
           <div class="callout-label">Counterintuitive insight</div>
           <p>Typing actually restricts your thinking. When you type, you shortcut the cognitive process. When you speak, you're forced to reason out loud first. AI's job is just to capture and format those thoughts - not to create them for you.</p>
         </div>
+      </div>
+      <div>
+        <h2 class="section-h" style="margin-top:0">This presentation, as a live example</h2>
+        <p style="font-size:var(--t-body-sm);margin-bottom:var(--s-sm)">The same approach, applied to building this talk. Click each step below.</p>
       </div>
     </div>
 
@@ -450,11 +572,7 @@
       IMAGE PLACEHOLDER - Todoist × Claude screenshot
       Show tasks with research pre-filled in descriptions, priority flags, labels applied
     -->
-    <div class="img-placeholder" style="height:180px;margin-bottom:var(--s-xl)">
-      <span class="ph-icon">📋</span>
-      <span class="ph-label">Todoist × Claude - screenshot or mockup</span>
-      <span class="ph-desc">Tasks with research pre-written in description field, priority stars, labels auto-applied</span>
-    </div>
+    <img src="assets/claude.jpg" alt="Todoist x Claude agents in action" style="width:100%;border-radius:var(--r-md);margin-bottom:var(--s-xl);" />
 
     <h2 class="section-h">Other things I automate - click to expand</h2>
     <div class="career-grid">
@@ -495,6 +613,19 @@
         <div class="career-card-outcome"><p>Built a Slack agent at Atlassian connected to a curated Confluence knowledge base. People ask "how do I get access to X?" → agent answers instantly from verified sources only. No more pinging a human for the same questions repeatedly.</p></div>
       </div>
     </div>
+
+    <div class="callout info" style="margin-top:var(--s-xl)">
+      <div class="callout-label">💬 Over to you</div>
+      <p style="font-size:var(--t-title-md);font-weight:700;margin-bottom:var(--s-md)">What's one repeatable task you do all the time - something you follow the same steps for every time - that you could turn into a skill for your own AI assistant?</p>
+      <div class="chip-input-row">
+        <input type="text" id="aios-input" placeholder="e.g. Formatting weekly reports, screening CVs..." maxlength="80" />
+        <button id="aios-submit">Add</button>
+      </div>
+      <div class="chips-area" id="aios-chips-area" style="margin-top:var(--s-md)">
+        <span class="chips-empty">No entries yet - be the first!</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -570,8 +701,9 @@
 
     </div>
 
+
     <h2 class="section-h">New roles companies will need</h2>
-    <div class="two-col">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--s-md);margin-bottom:var(--s-xl)">
       <div class="callout">
         <div class="callout-label">🏆 AI Champions</div>
         <p>People who have done the work themselves - not just read about it. Good teachers and advocates who create genuine energy around AI adoption. They're not "the AI person" - they're a colleague who can show you how they actually do it. They lead by example, not by title.</p>
@@ -580,17 +712,24 @@
         <div class="callout-label">🔄 Change Managers for AI</div>
         <p>Rolling out a fundamental change to how people work, at speed, across a whole organization - this is an industrial revolution. You cannot expect people to figure it out on their own. Dedicated change management support is essential to bring people along and make the transition stick.</p>
       </div>
+      <div class="callout muted">
+        <div class="callout-label">⚙️ AI Operations Specialist</div>
+        <p>A role I've lived personally. Someone who sits at the intersection of technology and business - not a developer, but someone who knows how to connect different systems and data sources, build AI agents, and design the workflows that tie it all together. As AI becomes infrastructure, every organization will need people who can operate it: wiring up the tools, maintaining the agents, and making sure the right data is flowing to the right place.</p>
+      </div>
     </div>
 
-    <!--
-      IMAGE PLACEHOLDER - Cognitive resilience / brain atrophy visual
-      Subtle illustration: a brain with "use it or lose it" concept - AI as support vs. replacement
-    -->
-    <div class="img-placeholder" style="height:140px;margin-top:var(--s-lg)">
-      <span class="ph-icon">🧠</span>
-      <span class="ph-label">Cognitive resilience visual</span>
-      <span class="ph-desc">AI as a support for non-strategic work vs. AI replacing thinking entirely. Thoughtful, non-alarmist tone.</span>
+    <div class="callout info">
+      <div class="callout-label">💬 Over to you</div>
+      <p style="font-size:var(--t-title-md);font-weight:700;">In your area, what new roles and skills have you noticed emerging?</p>
+      <div class="chip-input-row">
+        <input type="text" id="chip-input" placeholder="e.g. Prompt engineer, AI trainer..." maxlength="60" />
+        <button id="chip-submit">Add</button>
+      </div>
+      <div class="chips-area" id="chips-area">
+        <span class="chips-empty">No entries yet - be the first!</span>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -600,55 +739,11 @@
     <p class="eyebrow">AI in Your HR World</p>
     <h1 class="hero-statement smaller">From a prompt library to a system that runs itself.</h1>
 
-    <div class="callout info" style="margin-bottom:var(--s-xl)">
-      <div class="callout-label">A note before we start</div>
-      <p>I don't have deep HR expertise - what follows is one way to think about this based on what's technically possible. Think of it as a starting point, not a blueprint. I'd love to hear from you whether it resonates with your real challenges.</p>
-    </div>
-
     <p><strong>A well-crafted list of AI prompts is a great first step.</strong> But it's still manual - you have to remember to use it, find the right prompt, paste in the context, and act on the output. Every single time.</p>
-    <p>The next level is designing a <strong>system</strong> where most of this just happens - triggered automatically, context already loaded, output delivered where you need it.</p>
+    <p style="margin-bottom:var(--s-xl)">The next level is designing a <strong>system</strong> where most of this just happens - triggered automatically, context already loaded, output delivered where you need it.</p>
 
-    <h2 class="section-h">The architecture: two tools, two jobs</h2>
-
-    <div class="arch-diagram">
-      <div class="arch-layer layer-copilot">
-        <div class="arch-layer-label">🟣 Layer 1 - Copilot (your integration &amp; automation hub)</div>
-        <div class="arch-tools">
-          <div class="arch-tool">📧 Outlook</div>
-          <div class="arch-tool">💬 Teams</div>
-          <div class="arch-tool">📄 Word</div>
-          <div class="arch-tool">📊 Excel</div>
-          <div class="arch-tool">📁 SharePoint</div>
-          <div class="arch-tool">🗂️ HR System</div>
-          <div class="arch-tool">📅 Calendar</div>
-        </div>
-        <p style="font-size:var(--t-body-sm);color:#555;margin-top:var(--s-sm);margin-bottom:0">Lives inside the tools you already use. Acts directly - no copy-pasting. Holds your 10-country profiles, open projects, and recurring workflow templates.</p>
-      </div>
-
-      <div class="arch-arrow">⇅</div>
-
-      <div class="arch-layer layer-chatgpt">
-        <div class="arch-layer-label">🟢 Layer 2 - ChatGPT (your text generation engine)</div>
-        <div class="arch-tools">
-          <div class="arch-tool">📝 Job descriptions</div>
-          <div class="arch-tool">🔍 CV screening</div>
-          <div class="arch-tool">📋 Interview kits</div>
-          <div class="arch-tool">📊 Feedback synthesis</div>
-          <div class="arch-tool">🌍 Policy localization</div>
-          <div class="arch-tool">⚠️ Payroll risk analysis</div>
-        </div>
-        <p style="font-size:var(--t-body-sm);color:#555;margin-top:var(--s-sm);margin-bottom:0">Handles heavy text work: drafting, analyzing, synthesizing, localizing. Outputs fed back into Copilot workflows.</p>
-      </div>
-
-      <div class="arch-arrow">⇅</div>
-
-      <div class="arch-hr">
-        <div class="arch-hr-box">👩‍💼 You - reviewing, deciding, validating. Not doing the steps.</div>
-      </div>
-    </div>
-
-    <h2 class="section-h">Example: hiring a new role - step by step</h2>
-    <p style="font-size:var(--t-body-sm);color:#555;margin-bottom:var(--s-md)">Click through each step to see how the workflow flows - and who does what.</p>
+    <h2 class="section-h" style="margin-top:0">Example: hiring a new role - step by step</h2>
+    <p style="font-size:var(--t-body-sm);color:#555;margin-bottom:var(--s-md)">This applies to any AI tool - think of the actor as whichever agent or assistant you're using. Click through each step.</p>
 
     <div class="workflow-stepper">
       <div class="workflow-progress" id="wf-progress"></div>
@@ -660,19 +755,9 @@
       </div>
     </div>
 
-    <!--
-      IMAGE PLACEHOLDER - Recruitment workflow diagram
-      9-step flow color-coded by actor: blue = Copilot, green = ChatGPT, yellow = HR decision
-    -->
-    <div class="img-placeholder" style="height:120px;margin:var(--s-lg) 0">
-      <span class="ph-icon">🔁</span>
-      <span class="ph-label">Recruitment workflow diagram</span>
-      <span class="ph-desc">9-step flow, color-coded: 🟣 Copilot automated · 🟢 ChatGPT generates · 🟡 HR reviews/decides</span>
-    </div>
-
-    <div class="two-col" style="margin-top:var(--s-xl);align-items:start">
+    <h2 class="section-h">The morning briefing agent</h2>
+    <div class="two-col" style="align-items:start">
       <div>
-        <h2 class="section-h" style="margin-top:0">The morning briefing agent</h2>
         <p style="font-size:var(--t-body-sm)">One of the highest-ROI automations for a solo HR person covering 10 countries: an agent that runs every morning and prepares your day before you open your laptop.</p>
         <p style="font-size:var(--t-body-sm)">Think of it as a junior HR coordinator who has read everything overnight and prepared your briefing - without the headcount cost.</p>
       </div>
@@ -700,10 +785,19 @@
       </div>
     </div>
 
-    <div class="callout" style="margin-top:var(--s-xl)">
-      <div class="callout-label">Important caveat</div>
-      <p>AI in HR is powerful for: drafting, structuring, analyzing, synthesizing, prioritizing, communicating, standardizing. It should <strong>not</strong> replace: legal validation, termination decisions, collective labor matters, country-specific compliance interpretation. Use AI to free up your time for exactly those higher-judgment calls - and always validate locally when required.</p>
-    </div>
+    <h2 class="section-h">Resource spotlight</h2>
+    <a href="https://adoption.microsoft.com/en-us/scenario-library/human-resources/#compensation-benefits" target="_blank" style="display:block;text-decoration:none;">
+      <div style="background:var(--c-secondary);border-radius:var(--r-lg);padding:var(--s-xl);display:flex;align-items:center;gap:var(--s-xl);transition:opacity 150ms ease;">
+        <div style="font-size:56px;flex-shrink:0;">🪟</div>
+        <div>
+          <div style="font-size:var(--t-label-sm);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;color:rgba(255,255,255,0.6);margin-bottom:6px;">Microsoft · Copilot Adoption</div>
+          <div style="font-size:var(--t-title-md);font-weight:800;color:white;margin-bottom:var(--s-xs)">AI Scenario Library for HR</div>
+          <div style="font-size:var(--t-body-sm);color:rgba(255,255,255,0.75);margin-bottom:var(--s-sm)">Practical, role-specific Copilot use cases for HR teams - compensation, benefits, recruiting, onboarding and more. Built by Microsoft for real HR workflows.</div>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:var(--c-primary);color:var(--c-on-primary);padding:8px 16px;border-radius:var(--r-full);font-size:var(--t-body-sm);font-weight:700;">Open resource →</div>
+        </div>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -743,48 +837,42 @@
       <button class="day-tab" data-day="4">Day 4 - Showcase</button>
     </div>
 
-    <div class="day-content active" data-day="1">
-      <span class="day-tag tag-inspire">🌟 Inspire</span>
-      <h3 class="day-heading">Examples from the real world</h3>
-      <p>Show the best AI use cases from across the company - not vendor demos, but real people in your organization doing real things. Add examples from outside the company too.</p>
-      <p>Introduce new tools and workflows you want people to try. Energy-building mode - not tutorial mode. No slides full of features. Stories of impact.</p>
-    </div>
-    <div class="day-content" data-day="2">
-      <span class="day-tag tag-learn">📚 Learn</span>
-      <h3 class="day-heading">Hands-on tutorials</h3>
-      <p>Step-by-step tutorials on the specific tools introduced on Day 1 - led by someone who actually uses them daily, not an external trainer.</p>
-      <p>For global teams: run the same session across multiple time zones. Require prep work beforehand - e.g. a vibe-coded setup guide so people configure their machines in advance. No wasted session time on setup.</p>
-    </div>
-    <div class="day-content" data-day="3">
-      <span class="day-tag tag-build">🔨 Build</span>
-      <h3 class="day-heading">Work on something real</h3>
-      <p>The most important day. Small groups take a project they're <strong>currently working on</strong> and optimize it with AI. The output is directly relevant to their actual work.</p>
-      <p>Key principle: <strong>it's not extra time away from work - it is their work, in an experimental setting.</strong> They leave with something they can use on Monday. This matters for buy-in at every level of the organization.</p>
-    </div>
-    <div class="day-content" data-day="4">
-      <span class="day-tag tag-showcase">🏆 Showcase</span>
-      <h3 class="day-heading">Share, celebrate, sustain</h3>
-      <p>Groups present what they built. Recognition and awards. Momentum to carry forward. This creates the internal story your organization tells itself about AI - built from real people doing real work.</p>
-      <p>These showcases also surface your next wave of champions. The people who built something exciting on Day 3 are your best recruiters for the next cohort.</p>
+    <div style="background:var(--c-surface-muted);border-radius:var(--r-lg);padding:var(--s-xl)">
+      <div class="day-content active" data-day="1">
+        <span class="day-tag tag-inspire">🌟 Inspire</span>
+        <h3 class="day-heading">Examples from the real world</h3>
+        <p>Show the best AI use cases from across the company - not vendor demos, but real people in your organization doing real things. Add examples from outside the company too.</p>
+        <p>Introduce new tools and workflows you want people to try. Energy-building mode - not tutorial mode. No slides full of features. Stories of impact.</p>
+      </div>
+      <div class="day-content" data-day="2">
+        <span class="day-tag tag-learn">📚 Learn</span>
+        <h3 class="day-heading">Hands-on tutorials</h3>
+        <p>Step-by-step tutorials on the specific tools introduced on Day 1 - led by someone who actually uses them daily, not an external trainer.</p>
+        <p>For global teams: run the same session across multiple time zones. Require prep work beforehand - e.g. a vibe-coded setup guide so people configure their machines in advance. No wasted session time on setup.</p>
+      </div>
+      <div class="day-content" data-day="3">
+        <span class="day-tag tag-build">🔨 Build</span>
+        <h3 class="day-heading">Work on something real</h3>
+        <p>The most important day. Small groups take a project they're <strong>currently working on</strong> and optimize it with AI. The output is directly relevant to their actual work.</p>
+        <p>Key principle: <strong>it's not extra time away from work - it is their work, in an experimental setting.</strong> They leave with something they can use on Monday. This matters for buy-in at every level of the organization.</p>
+      </div>
+      <div class="day-content" data-day="4">
+        <span class="day-tag tag-showcase">🏆 Showcase</span>
+        <h3 class="day-heading">Share, celebrate, sustain</h3>
+        <p>Groups present what they built. Recognition and awards. Momentum to carry forward. This creates the internal story your organization tells itself about AI - built from real people doing real work.</p>
+        <p>These showcases also surface your next wave of champions. The people who built something exciting on Day 3 are your best recruiters for the next cohort.</p>
+      </div>
     </div>
 
     <h2 class="section-h">Champions &amp; communities of practice</h2>
     <div class="two-col">
       <div>
         <p style="font-size:var(--t-body-sm)">After big training events, communities of practice keep the momentum alive - regular workshops focused on what people struggled with most, so they can get repetitions in and build real confidence.</p>
-        <p style="font-size:var(--t-body-sm)"><strong>Champions Network:</strong> Identify the highest AI tool users. Invite them to run weekly office hours. Make them go-to facilitators for future training. They lead by example - as colleagues, not "the AI person."</p>
+        <p style="font-size:var(--t-body-sm)"><strong>Champions Network:</strong> Identify the highest AI tool users across the org. Invite them to run weekly office hours and make them go-to facilitators for future training. They lead by example as colleagues, not "the AI person." But being a power user doesn't automatically make someone a good teacher - and that gap matters.</p>
+        <p style="font-size:var(--t-body-sm)">Champions need to be coached on how to actually transfer knowledge: breaking things down into bite-sized steps, building follow-along tutorials people can do in real time, and developing the patience to explain the simplest thing without making someone feel slow for not knowing it. The best champions are the ones who remember what it felt like to not know - and teach from that place.</p>
         <p style="font-size:var(--t-body-sm)"><strong>Async sharing channels:</strong> A dedicated Teams channel where people post short screen recordings of experiments. Reactions and comments create organic momentum. Normalise experimentation and make it visible across the org.</p>
       </div>
-      <!--
-        IMAGE PLACEHOLDER - Champions network diagram
-        Network graph: central champion nodes connected to team clusters across functions.
-        Shows peer-to-peer spread vs top-down mandate.
-      -->
-      <div class="img-placeholder" style="min-height:200px">
-        <span class="ph-icon">🌐</span>
-        <span class="ph-label">Champions network diagram</span>
-        <span class="ph-desc">Champion nodes at center, connected to team clusters across different functions. Peer-to-peer spread, not top-down.</span>
-      </div>
+      <img src="assets/champions.png" alt="AI Champions network diagram" style="width:100%;border-radius:var(--r-md);" />
     </div>
 
     <h2 class="section-h">The bottleneck problem - the thing everyone misses</h2>
@@ -824,11 +912,129 @@
   <p>Sasha Pometko · Winoa Global HR Summit · June 2026 · <a href="https://linkedin.com/in/sasha-pometko" target="_blank">linkedin.com/in/sasha-pometko</a></p>
 </footer>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBRkG_bpBY1BrgSIodPbMY-WJIq6JKEOnE",
+    authDomain: "win-preso.firebaseapp.com",
+    databaseURL: "https://win-preso-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "win-preso",
+    storageBucket: "win-preso.firebasestorage.app",
+    messagingSenderId: "91455445505",
+    appId: "1:91455445505:web:c0d4992146eb8102487e00"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const chipsRef = db.ref("skills_chips");
+
+  const chipsArea = document.getElementById("chips-area");
+  const chipInput = document.getElementById("chip-input");
+  const chipSubmit = document.getElementById("chip-submit");
+
+  // Listen for chips in real time
+  chipsRef.on("value", snapshot => {
+    chipsArea.innerHTML = "";
+    const data = snapshot.val();
+    if (!data) {
+      chipsArea.innerHTML = '<span class="chips-empty">No entries yet - be the first!</span>';
+      return;
+    }
+    Object.entries(data).forEach(([key, entry]) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.innerHTML = `${entry.text}<button class="chip-remove" aria-label="Remove">×</button>`;
+      chip.querySelector(".chip-remove").addEventListener("click", () => {
+        chipsRef.child(key).remove();
+      });
+      chipsArea.appendChild(chip);
+    });
+  });
+
+  function submitChip() {
+    const raw = chipInput.value.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    if (!raw) return;
+    chipsRef.push({ text: raw, ts: Date.now() });
+    chipInput.value = "";
+    chipInput.focus();
+  }
+
+  chipSubmit.addEventListener("click", submitChip);
+  chipInput.addEventListener("keydown", e => { if (e.key === "Enter") submitChip(); });
+
+  // Icebreaker chips (Welcome tab)
+  const iceRef = db.ref("ice_chips");
+  const iceArea = document.getElementById("ice-chips-area");
+  const iceInput = document.getElementById("ice-input");
+  const iceSubmit = document.getElementById("ice-submit");
+
+  iceRef.on("value", snapshot => {
+    iceArea.innerHTML = "";
+    const data = snapshot.val();
+    if (!data) {
+      iceArea.innerHTML = '<span class="chips-empty">Be the first to answer...</span>';
+      return;
+    }
+    Object.entries(data).forEach(([key, entry]) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.innerHTML = `${entry.text}<button class="chip-remove" aria-label="Remove">×</button>`;
+      chip.querySelector(".chip-remove").addEventListener("click", () => iceRef.child(key).remove());
+      iceArea.appendChild(chip);
+    });
+  });
+
+  function submitIce() {
+    const raw = iceInput.value.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    if (!raw) return;
+    iceRef.push({ text: raw, ts: Date.now() });
+    iceInput.value = "";
+    iceInput.focus();
+  }
+
+  iceSubmit.addEventListener("click", submitIce);
+  iceInput.addEventListener("keydown", e => { if (e.key === "Enter") submitIce(); });
+
+  // AI OS repeatable task chips
+  const aiosRef = db.ref("aios_chips");
+  const aiosArea = document.getElementById("aios-chips-area");
+  const aiosInput = document.getElementById("aios-input");
+  const aiosSubmit = document.getElementById("aios-submit");
+
+  aiosRef.on("value", snapshot => {
+    aiosArea.innerHTML = "";
+    const data = snapshot.val();
+    if (!data) {
+      aiosArea.innerHTML = '<span class="chips-empty">No entries yet - be the first!</span>';
+      return;
+    }
+    Object.entries(data).forEach(([key, entry]) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.innerHTML = `${entry.text}<button class="chip-remove" aria-label="Remove">×</button>`;
+      chip.querySelector(".chip-remove").addEventListener("click", () => aiosRef.child(key).remove());
+      aiosArea.appendChild(chip);
+    });
+  });
+
+  function submitAios() {
+    const raw = aiosInput.value.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    if (!raw) return;
+    aiosRef.push({ text: raw, ts: Date.now() });
+    aiosInput.value = "";
+    aiosInput.focus();
+  }
+
+  aiosSubmit.addEventListener("click", submitAios);
+  aiosInput.addEventListener("keydown", e => { if (e.key === "Enter") submitAios(); });
+</script>
+
 <script>
 /* ============================================================
    Tab routing
    ============================================================ */
-const TABS = ["intro","ai-os","skills","hr","scale"];
+const TABS = ["welcome","intro","ai-os","skills","scale","hr"];
 
 function activateTab(id) {
   if (!TABS.includes(id)) id = TABS[0];
@@ -895,15 +1101,15 @@ document.querySelectorAll(".skill-card").forEach(card => {
    Recruitment workflow stepper
    ============================================================ */
 const WF_STEPS = [
-  { actor:"human",   label:"You (HR)",   title:"Trigger: open a new recruitment project",          desc:"Tag it with role + country in Copilot. That's your only input to kick off the entire flow." },
-  { actor:"copilot", label:"Copilot",    title:"Auto-load country context",                        desc:"Copilot pulls your country profile from the knowledge base: legislation, salary benchmarks, sourcing channels, notice period norms. All pre-loaded - nothing to look up." },
-  { actor:"chatgpt", label:"ChatGPT",    title:"Generate the job description",                     desc:"ChatGPT drafts the full JD using role context + country profile. You review and approve in ~10 minutes instead of writing from scratch." },
-  { actor:"copilot", label:"Copilot",    title:"Post to job boards",                               desc:"Copilot posts to the relevant channels or drafts the posting email, ready to send. One click instead of logging into multiple platforms." },
-  { actor:"chatgpt", label:"ChatGPT",    title:"Screen and rank CVs",                              desc:"CVs come in → ChatGPT screens against predefined criteria, ranks candidates, flags risks (salary mismatch, instability, relocation concerns). You get a shortlist with explanations - not a pile of PDFs." },
-  { actor:"copilot", label:"Copilot",    title:"Generate interview kit and schedule",              desc:"Copilot auto-generates a structured interview kit and sends it to interviewers via Teams. Interview reminders scheduled automatically." },
-  { actor:"chatgpt", label:"ChatGPT",    title:"Synthesize interview feedback",                    desc:"Interviewers submit notes → ChatGPT synthesizes all feedback into a hiring recommendation: consensus points, risks, disagreements, suggested decision. No more chasing email threads." },
-  { actor:"human",   label:"You (HR)",   title:"You make the decision",                            desc:"Based on the synthesized recommendation. This is where your judgment matters - the system has done all the prep work. You decide." },
-  { actor:"copilot", label:"Copilot",    title:"Trigger onboarding",                               desc:"Decision made → Copilot generates the 30-60-90 day plan for that country, creates all calendar invites, drafts the welcome email, and sends manager instructions. Automatically." }
+  { actor:"human",   label:"You",        title:"Trigger: open a new recruitment project",   desc:"Tag it with role and country. That's your only input to kick off the entire flow." },
+  { actor:"copilot", label:"AI agent",   title:"Auto-load country context",                 desc:"The agent pulls your country profile from the knowledge base: legislation, salary benchmarks, sourcing channels, notice period norms. All pre-loaded - nothing to look up." },
+  { actor:"chatgpt", label:"AI agent",   title:"Generate the job description",              desc:"The agent drafts the full JD using role context and country profile. You review and approve in ~10 minutes instead of writing from scratch." },
+  { actor:"copilot", label:"AI agent",   title:"Post to job boards",                        desc:"Posts to the relevant channels or drafts the posting email, ready to send. One action instead of logging into multiple platforms." },
+  { actor:"chatgpt", label:"AI agent",   title:"Screen and rank CVs",                       desc:"CVs come in - agent screens against predefined criteria, ranks candidates, flags risks (salary mismatch, instability, relocation concerns). You get a shortlist with explanations, not a pile of PDFs." },
+  { actor:"copilot", label:"AI agent",   title:"Generate interview kit and schedule",       desc:"Auto-generates a structured interview kit and sends it to interviewers. Reminders scheduled automatically." },
+  { actor:"chatgpt", label:"AI agent",   title:"Synthesize interview feedback",             desc:"Interviewers submit notes - agent synthesizes all feedback into a hiring recommendation: consensus points, risks, disagreements, suggested decision. No more chasing email threads." },
+  { actor:"human",   label:"You",        title:"You make the decision",                     desc:"Based on the synthesized recommendation. This is where your judgment matters - the system has done all the prep work. You decide." },
+  { actor:"copilot", label:"AI agent",   title:"Trigger onboarding",                        desc:"Decision made - agent generates the 30-60-90 day plan for that country, creates all calendar invites, drafts the welcome email, and sends manager instructions. Automatically." }
 ];
 
 let currentStep = 0;
